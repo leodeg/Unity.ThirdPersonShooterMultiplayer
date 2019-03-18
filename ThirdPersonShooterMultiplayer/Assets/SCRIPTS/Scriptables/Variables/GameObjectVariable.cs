@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SO
+namespace StateObject
 {
     /// <summary>
     /// Similar to transform variables but this one is for keeping references to gameObjects or 

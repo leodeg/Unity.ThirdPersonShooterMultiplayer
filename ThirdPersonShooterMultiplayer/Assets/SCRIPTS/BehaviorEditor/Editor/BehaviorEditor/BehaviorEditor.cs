@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace SA.BehaviorEditor
+namespace StateAction.BehaviorEditor
 {
     public class BehaviorEditor : EditorWindow
     {
@@ -129,8 +129,8 @@ namespace SA.BehaviorEditor
 				for (int i = 0; i < settings.currentGraph.windows.Count; i++)
 				{
 					BaseNode n = settings.currentGraph.windows[i];
-					if(n.stateRef.currentState != null)
-						EditorUtility.SetDirty(n.stateRef.currentState);
+					if(n.stateReference.currentState != null)
+						EditorUtility.SetDirty(n.stateReference.currentState);
 			
 				}
 
@@ -160,7 +160,7 @@ namespace SA.BehaviorEditor
 
 					if (b.drawNode is StateNode)
 					{
-						if (currentStateManager != null && b.stateRef.currentState == currentStateManager.currentState)
+						if (currentStateManager != null && b.stateReference.currentState == currentStateManager.currentState)
 						{
 							b.windowRect = GUI.Window(i, b.windowRect,
 								DrawNodeWindow, b.windowTitle,activeStyle);
@@ -312,9 +312,9 @@ namespace SA.BehaviorEditor
                         transNode.targetNode = selectedNode.id;
 
                         BaseNode enterNode = BehaviorEditor.settings.currentGraph.GetNodeWithIndex(transNode.enterNode);
-                        Transition transition = enterNode.stateRef.currentState.GetTransition(transNode.transRef.transitionId);
+                        Transition transition = enterNode.stateReference.currentState.GetTransition(transNode.transRef.transitionId);
 
-						transition.targetState = selectedNode.stateRef.currentState;
+						transition.targetState = selectedNode.stateReference.currentState;
                     }
                 }
             }
@@ -348,7 +348,7 @@ namespace SA.BehaviorEditor
             GenericMenu menu = new GenericMenu();
             if (selectedNode.drawNode is StateNode)
             {
-                if (selectedNode.stateRef.currentState != null)
+                if (selectedNode.stateReference.currentState != null)
                 {
                     menu.AddSeparator("");
                     menu.AddItem(new GUIContent("Add Condition"), false, ContextCallback, UserActions.addTransitionNode);
@@ -419,7 +419,7 @@ namespace SA.BehaviorEditor
 					{
 						BaseNode enterNode = settings.currentGraph.GetNodeWithIndex(selectedNode.enterNode);
 						if (enterNode != null)
-							enterNode.stateRef.currentState.RemoveTransition(selectedNode.transRef.transitionId);
+							enterNode.stateReference.currentState.RemoveTransition(selectedNode.transRef.transitionId);
 					}
 
 					nodesToDelete++;

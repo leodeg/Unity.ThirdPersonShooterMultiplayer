@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SO
+namespace StateObject
 {
     public class NumberVariableToNumberVariable_Comparison : EventExecutionOnMB
     {

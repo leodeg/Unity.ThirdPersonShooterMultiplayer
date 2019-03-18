@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SA;
+using StateAction;
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace SA.CustomUI
+namespace StateAction.CustomUI
 {
-	[CustomEditor(typeof(State))]
+	[CustomEditor(typeof(UnityEditor.Animations.AnimatorState))]
 	public class StateGUI : Editor
 	{
 		SerializedObject serializedState;
@@ -67,7 +67,7 @@ namespace SA.CustomUI
 
 		void SetupReordableLists()
 		{
-			State curState = (State)target;
+			UnityEditor.Animations.AnimatorState curState = (UnityEditor.Animations.AnimatorState)target;
 			serializedState = new SerializedObject(curState);
 			onFixedList = new ReorderableList(serializedState,serializedState.FindProperty("onFixed"), true, true, true, true);
 			onUpdateList = new ReorderableList(serializedState,serializedState.FindProperty("onUpdate"), true, true, true, true);

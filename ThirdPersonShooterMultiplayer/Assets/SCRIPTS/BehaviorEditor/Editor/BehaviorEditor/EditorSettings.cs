@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SA.BehaviorEditor
+namespace StateAction.BehaviorEditor
 {
     [CreateAssetMenu(menuName ="Editor/Settings")]
     public class EditorSettings : ScriptableObject
@@ -27,7 +27,7 @@ namespace SA.BehaviorEditor
             baseNode.windowRect.y = pos.y;
             currentGraph.windows.Add(baseNode);
             baseNode.transRef = new TransitionNodeReferences();
-            baseNode.stateRef = new StateNodeReferences();
+            baseNode.stateReference = new StateNodeReferences();
             baseNode.id = currentGraph.idCount;
             currentGraph.idCount++;
             return baseNode;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SO
+namespace StateObject
 {
     [CreateAssetMenu(menuName = "Variables/Sprite")]
     public class SpriteVariable : ScriptableObject

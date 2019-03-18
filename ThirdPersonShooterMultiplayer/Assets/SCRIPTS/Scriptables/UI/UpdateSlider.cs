@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SO;
+using StateObject;
 using UnityEngine.UI;
 
-namespace SO.UI
+namespace StateObject.UI
 {
     public class UpdateSlider : UIPropertyUpdater
     {

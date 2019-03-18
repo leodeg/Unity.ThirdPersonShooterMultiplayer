@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace SA.BehaviorEditor
+namespace StateAction.BehaviorEditor
 {
     [CreateAssetMenu]
     public class BehaviorGraph : ScriptableObject
@@ -51,7 +51,7 @@ namespace SA.BehaviorEditor
                 if (windows[i].id == b.id)
                     continue;
 
-                if (windows[i].stateRef.currentState == b.stateRef.currentState &&
+                if (windows[i].stateReference.currentState == b.stateReference.currentState &&
                     !windows[i].isDuplicate)
                     return true;
             }
@@ -67,9 +67,9 @@ namespace SA.BehaviorEditor
                 Debug.Log("false");
                 return false;
             }
-            for (int i = 0; i < enter.stateRef.currentState.transitions.Count; i++)
+            for (int i = 0; i < enter.stateReference.currentState.transitions.Count; i++)
             {
-                Transition t = enter.stateRef.currentState.transitions[i];
+                Transition t = enter.stateReference.currentState.transitions[i];
                 if (t.condition == b.transRef.previousCondition && b.transRef.transitionId != t.id)
                 {
                     return true;

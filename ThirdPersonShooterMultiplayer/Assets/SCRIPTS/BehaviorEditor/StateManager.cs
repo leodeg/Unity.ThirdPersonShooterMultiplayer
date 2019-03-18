@@ -2,25 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SA
+namespace StateAction
 {
     public class StateManager : MonoBehaviour
     {
-        public float health;
+		public MovementProperties movementProperties;
         public State currentState;
-
-        [HideInInspector] public float delta;
-        [HideInInspector] public Transform mTransform;
+        [HideInInspector] public float deltaTime;
+        [HideInInspector] public Transform transformInstance;
+		[HideInInspector] public Rigidbody rigidbodyInstance;
 
         private void Start()
         {
-            mTransform = this.transform;
+            transformInstance = this.transform;
+			rigidbodyInstance = GetComponent<Rigidbody> ();
+			rigidbodyInstance.drag = 4;
+			rigidbodyInstance.angularDrag = 999;
+			rigidbodyInstance.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        private void Update()
+		private void FixedUpdate ()
+		{
+			deltaTime = Time.deltaTime;
+			if (currentState != null)
+			{
+				currentState.FixedTick (this);
+			}
+		}
+
+		private void Update()
         {
-            if(currentState != null)
-            {
+			deltaTime = Time.deltaTime;
+			if (currentState != null)
+			{
                 currentState.Tick(this);
             }
         }

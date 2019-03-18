@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SO
+namespace StateObject
 {
     [CustomEditor(typeof(GameEvent))]
     public class EventEditor : Editor

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SO;
+using StateObject;
 
-namespace SO.UI
+namespace StateObject.UI
 {
     public class UpdateImage : UIPropertyUpdater
     {

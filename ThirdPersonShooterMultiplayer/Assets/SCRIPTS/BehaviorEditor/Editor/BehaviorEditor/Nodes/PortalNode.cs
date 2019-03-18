@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 
-namespace SA.BehaviorEditor
+namespace StateAction.BehaviorEditor
 {
 	[CreateAssetMenu(menuName = "Editor/Nodes/Portal Node")]
 	public class PortalNode : DrawNode
@@ -17,12 +17,12 @@ namespace SA.BehaviorEditor
 
 		public override void DrawWindow(BaseNode b)
 		{
-			b.stateRef.currentState = (State)EditorGUILayout.ObjectField(b.stateRef.currentState, typeof(State), false);
-			b.isAssigned = b.stateRef.currentState != null;
+			b.stateReference.currentState = (State)EditorGUILayout.ObjectField(b.stateReference.currentState, typeof(State), false);
+			b.isAssigned = b.stateReference.currentState != null;
 
-			if (b.stateRef.previousState != b.stateRef.currentState)
+			if (b.stateReference.previousState != b.stateReference.currentState)
 			{
-				b.stateRef.previousState = b.stateRef.currentState;
+				b.stateReference.previousState = b.stateReference.currentState;
 				BehaviorEditor.forceSetDirty = true;
 			}
 		}

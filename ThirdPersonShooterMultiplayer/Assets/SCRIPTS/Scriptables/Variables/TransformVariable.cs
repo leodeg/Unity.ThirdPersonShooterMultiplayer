@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SO
+namespace StateObject
 {
     [CreateAssetMenu(menuName = "Variables/Transform")]
     public class TransformVariable : ScriptableObject
     {
-        public Transform value;
+        public Transform transform;
 
         public void Set(Transform v)
         {
-            value = v;
+            transform = v;
         }
 
         public void Set(TransformVariable v)
         {
-            value = v.value;
+            transform = v.transform;
         }
 
         public void Clear()
         {
-            value = null;
+            transform = null;
         }
     }
 }

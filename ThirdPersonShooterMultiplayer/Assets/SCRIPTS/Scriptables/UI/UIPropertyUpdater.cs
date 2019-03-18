@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SO.UI
+namespace StateObject.UI
 {
     public class UIPropertyUpdater : GameEventListener
     {

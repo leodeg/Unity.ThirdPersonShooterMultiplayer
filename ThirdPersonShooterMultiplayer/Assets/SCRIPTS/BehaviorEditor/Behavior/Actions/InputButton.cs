@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SA
+namespace StateAction
 {
 	[CreateAssetMenu(menuName = "Inputs/Button")]
 	public class InputButton : Action

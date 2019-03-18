@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace SA.BehaviorEditor
+namespace StateAction.BehaviorEditor
 {
     [System.Serializable]
     public class BaseNode 
@@ -28,7 +28,7 @@ namespace SA.BehaviorEditor
         public bool previousCollapse;
 
         [SerializeField]
-        public StateNodeReferences stateRef;
+        public StateNodeReferences stateReference;
         [SerializeField]
         public TransitionNodeReferences transRef;
 

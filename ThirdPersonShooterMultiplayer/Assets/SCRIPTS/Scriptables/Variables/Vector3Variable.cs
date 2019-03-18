@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SO
+namespace StateObject
 {
 	[CreateAssetMenu(menuName = "Variables/Vector3")]
 	public class Vector3Variable : ScriptableObject

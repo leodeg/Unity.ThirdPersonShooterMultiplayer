@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using SA;
+using StateAction;
 
-namespace SA.BehaviorEditor
+namespace StateAction.BehaviorEditor
 {
     [CreateAssetMenu(menuName ="Editor/Transition Node")]
     public class TransitionNode : DrawNode
@@ -24,13 +24,13 @@ namespace SA.BehaviorEditor
 				return;
 			}
 			
-			if (enterNode.stateRef.currentState == null)
+			if (enterNode.stateReference.currentState == null)
 			{
 				BehaviorEditor.settings.currentGraph.DeleteNode(b.id);
 				return;
 			}
 
-            Transition transition = enterNode.stateRef.currentState.GetTransition(b.transRef.transitionId);
+            Transition transition = enterNode.stateReference.currentState.GetTransition(b.transRef.transitionId);
 
 			if (transition == null)
 				return;
@@ -61,7 +61,7 @@ namespace SA.BehaviorEditor
 					if (targetNode != null)
 					{
 						if (!targetNode.isDuplicate)
-							transition.targetState = targetNode.stateRef.currentState;
+							transition.targetState = targetNode.stateReference.currentState;
 						else
 							transition.targetState = null;
 					}

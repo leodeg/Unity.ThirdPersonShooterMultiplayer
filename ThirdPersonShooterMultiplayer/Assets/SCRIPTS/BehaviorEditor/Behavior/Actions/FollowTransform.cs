@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SO;
+using StateObject;
 
-namespace SA
+namespace StateAction
 {
     [CreateAssetMenu]
     public class FollowTransform : Action
@@ -16,14 +16,17 @@ namespace SA
 		public override void Execute ()
 		{
 
-			if (targetTransform.value == null)
+			if (targetTransform.transform == null)
+			{
 				return;
-			if (currentTransform.value == null)
-				return;
+			}
 
-			Vector3 targetPosition =
-				Vector3.Lerp (currentTransform.value.position, targetTransform.value.position, Time.deltaTime * speed);
-			currentTransform.value.position = targetPosition;
+			if (currentTransform.transform == null)
+			{
+				return;
+			}
+
+			currentTransform.transform.position = Vector3.Lerp (currentTransform.transform.position, targetTransform.transform.position, Time.deltaTime * speed);
 		}
 	}
 }

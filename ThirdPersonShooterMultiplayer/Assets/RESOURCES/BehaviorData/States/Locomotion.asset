@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
   m_Name: Locomotion
   m_EditorClassIdentifier: 
-  onFixed: []
-  onUpdate: []
+  onFixed:
+  - {fileID: 11400000, guid: df0e2bf50d0ec6246996948cce897541, type: 2}
+  - {fileID: 11400000, guid: 85198e64839d8bc48a42b179bc1f2958, type: 2}
+  - {fileID: 11400000, guid: fde54421d30365a43af80aee734f395a, type: 2}
+  onUpdate:
+  - {fileID: 11400000, guid: df0e2bf50d0ec6246996948cce897541, type: 2}
   onEnter: []
   onExit: []
   idCount: 0
