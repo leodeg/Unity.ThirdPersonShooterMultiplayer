@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c0c23f572e9ce40abb362c2dd2164d, type: 3}
+  m_Script: {fileID: 11500000, guid: a9f9936621775484798e426bc1ad1411, type: 3}
   m_Name: InputManager
   m_EditorClassIdentifier: 
   horizontal: {fileID: 11400000, guid: 770e09e5525e2b440bac4b677c8fa632, type: 2}
   vertical: {fileID: 11400000, guid: 115f39c5a9c1b56469d7c49c037685cb, type: 2}
+  aimingInput: {fileID: 11400000, guid: 2e0135ee349699c4abb7a457fadb7b4a, type: 2}
   moveAmount: 0
-  moveDirection: {x: 0, y: 0, z: 0}
-  cameraTransfrom: {fileID: 11400000, guid: 776bd2bc021657440a9d2752c5340ecc, type: 2}
+  moveDirection: {x: -0, y: 0, z: 0}
+  cameraTransfrom: {fileID: 11400000, guid: f4fea6dbe017ed846aae2248872c87a9, type: 2}
   playerStates: {fileID: 11400000, guid: 8d4714cdefad51940ac77e86f9f4a729, type: 2}

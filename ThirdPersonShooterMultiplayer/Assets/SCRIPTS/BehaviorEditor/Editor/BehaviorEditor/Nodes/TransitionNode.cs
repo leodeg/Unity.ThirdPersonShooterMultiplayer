@@ -1,63 +1,63 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using StateAction;
+using UnityEditor;
+using UnityEngine;
 
 namespace StateAction.BehaviorEditor
 {
-    [CreateAssetMenu(menuName ="Editor/Transition Node")]
-    public class TransitionNode : DrawNode
-    {
-      
-        public void Init(StateNode enterState, Transition transition)
-        {
-      //      this.enterState = enterState;
-        }
+	[CreateAssetMenu (menuName = "Editor/Transition Node")]
+	public class TransitionNode : DrawNode
+	{
 
-        public override void DrawWindow(BaseNode b)
-        {
-            EditorGUILayout.LabelField("");
-            BaseNode enterNode = BehaviorEditor.settings.currentGraph.GetNodeWithIndex(b.enterNode);
+		public void Init (StateNode enterState, Transition transition)
+		{
+			//      this.enterState = enterState;
+		}
+
+		public override void DrawWindow (BaseNode b)
+		{
+			EditorGUILayout.LabelField ("");
+			BaseNode enterNode = BehaviorEditor.settings.currentGraph.GetNodeWithIndex (b.enterNode);
 			if (enterNode == null)
 			{
 				return;
 			}
-			
+
 			if (enterNode.stateReference.currentState == null)
 			{
-				BehaviorEditor.settings.currentGraph.DeleteNode(b.id);
+				BehaviorEditor.settings.currentGraph.DeleteNode (b.id);
 				return;
 			}
 
-            Transition transition = enterNode.stateReference.currentState.GetTransition(b.transRef.transitionId);
+			Transition transition = enterNode.stateReference.currentState.GetTransition (b.transRef.transitionId);
 
 			if (transition == null)
 				return;
 
 
-            transition.condition = 
-                (Condition)EditorGUILayout.ObjectField(transition.condition
-                , typeof(Condition), false);
+			transition.condition =
+				(Condition)EditorGUILayout.ObjectField (transition.condition
+				, typeof (Condition), false);
 
-            if(transition.condition == null)
-            {            
-                EditorGUILayout.LabelField("No Condition!");
-                b.isAssigned = false;
-            }
-            else
-            {
+			if (transition.condition == null)
+			{
+				EditorGUILayout.LabelField ("No Condition!");
+				b.isAssigned = false;
+			}
+			else
+			{
 
-                b.isAssigned = true;
+				b.isAssigned = true;
 				if (b.isDuplicate)
 				{
-					EditorGUILayout.LabelField("Duplicate Condition!");
+					EditorGUILayout.LabelField ("Duplicate Condition!");
 				}
 				else
 				{
-					GUILayout.Label(transition.condition.description);
+					GUILayout.Label (transition.condition.description);
 
-					BaseNode targetNode = BehaviorEditor.settings.currentGraph.GetNodeWithIndex(b.targetNode);
+					BaseNode targetNode = BehaviorEditor.settings.currentGraph.GetNodeWithIndex (b.targetNode);
 					if (targetNode != null)
 					{
 						if (!targetNode.isDuplicate)
@@ -71,63 +71,63 @@ namespace StateAction.BehaviorEditor
 					}
 				}
 			}
-            
-            if (b.transRef.previousCondition != transition.condition)
-            {
-                b.transRef.previousCondition = transition.condition;
-                b.isDuplicate = BehaviorEditor.settings.currentGraph.IsTransitionDuplicate(b);
-				
+
+			if (b.transRef.previousCondition != transition.condition)
+			{
+				b.transRef.previousCondition = transition.condition;
+				b.isDuplicate = BehaviorEditor.settings.currentGraph.IsTransitionDuplicate (b);
+
 				if (!b.isDuplicate)
-                {
+				{
 					BehaviorEditor.forceSetDirty = true;
 					// BehaviorEditor.settings.currentGraph.SetNode(this);   
 				}
-            }
-            
-        }
+			}
 
-        public override void DrawCurve(BaseNode b)
-        {
-            Rect rect = b.windowRect;
-            rect.y += b.windowRect.height * .5f;
-            rect.width = 1;
-            rect.height = 1;
+		}
 
-            BaseNode e = BehaviorEditor.settings.currentGraph.GetNodeWithIndex(b.enterNode);
-            if (e == null)
-            {
-                BehaviorEditor.settings.currentGraph.DeleteNode(b.id);
-            }
-            else
-            {
-                Color targetColor = Color.green;
-                if (!b.isAssigned || b.isDuplicate)
-                    targetColor = Color.red;
+		public override void DrawCurve (BaseNode b)
+		{
+			Rect rect = b.windowRect;
+			rect.y += b.windowRect.height * .5f;
+			rect.width = 1;
+			rect.height = 1;
 
-                Rect r = e.windowRect;
-                BehaviorEditor.DrawNodeCurve(r, rect, true, targetColor);
-            }
+			BaseNode e = BehaviorEditor.settings.currentGraph.GetNodeWithIndex (b.enterNode);
+			if (e == null)
+			{
+				BehaviorEditor.settings.currentGraph.DeleteNode (b.id);
+			}
+			else
+			{
+				Color targetColor = Color.green;
+				if (!b.isAssigned || b.isDuplicate)
+					targetColor = Color.red;
 
-            if (b.isDuplicate)
-                return;
+				Rect r = e.windowRect;
+				BehaviorEditor.DrawNodeCurve (r, rect, true, targetColor);
+			}
 
-            if(b.targetNode > 0)
-            {
-                BaseNode t = BehaviorEditor.settings.currentGraph.GetNodeWithIndex(b.targetNode);
-                if (t == null)
-                {
-                    b.targetNode = -1;
-                }
-                else
-                {
-					
+			if (b.isDuplicate)
+				return;
 
-                    rect = b.windowRect;
-                    rect.x += rect.width;
-                    Rect endRect = t.windowRect;
-                    endRect.x -= endRect.width * .5f;
+			if (b.targetNode > 0)
+			{
+				BaseNode t = BehaviorEditor.settings.currentGraph.GetNodeWithIndex (b.targetNode);
+				if (t == null)
+				{
+					b.targetNode = -1;
+				}
+				else
+				{
 
-                    Color targetColor = Color.green;
+
+					rect = b.windowRect;
+					rect.x += rect.width;
+					Rect endRect = t.windowRect;
+					endRect.x -= endRect.width * .5f;
+
+					Color targetColor = Color.green;
 
 					if (t.drawNode is StateNode)
 					{
@@ -141,11 +141,11 @@ namespace StateAction.BehaviorEditor
 						else
 							targetColor = Color.yellow;
 					}
-                    
-                    BehaviorEditor.DrawNodeCurve(rect,endRect,false, targetColor);
-                }
 
-            }
-        }
-    }
+					BehaviorEditor.DrawNodeCurve (rect, endRect, false, targetColor);
+				}
+
+			}
+		}
+	}
 }

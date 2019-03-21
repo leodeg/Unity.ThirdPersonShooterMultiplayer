@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace StateAction
 {
@@ -9,7 +7,8 @@ namespace StateAction
 	{
 		public float horizontal;
 		public float vertical;
-		public float speed;
+		public float moveAmount;
 		public Vector3 moveDirection;
+		public Vector3 cameraForward;
 	}
 }

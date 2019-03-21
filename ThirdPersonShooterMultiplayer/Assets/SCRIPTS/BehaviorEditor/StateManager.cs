@@ -6,12 +6,14 @@ namespace StateAction
 {
 	public class StateManager : MonoBehaviour
 	{
-		public MovementProperties movementProperties;
 		public State currentState;
+		public StateProperties stateProperties;
+		public MovementProperties movementProperties;
+
 		[HideInInspector] public float deltaTime;
-		[HideInInspector] public Transform transformInstance;
-		[HideInInspector] public Rigidbody rigidbodyInstance;
 		[HideInInspector] public Animator animatorInstance;
+		[HideInInspector] public Rigidbody rigidbodyInstance;
+		[HideInInspector] public Transform transformInstance;
 		[HideInInspector] public LayerMask ignoreLayers;
 
 		private void Start ()

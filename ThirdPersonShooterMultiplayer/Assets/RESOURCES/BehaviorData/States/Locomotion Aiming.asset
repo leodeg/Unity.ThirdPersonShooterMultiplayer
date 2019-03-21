@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
-  m_Name: Locomotion
+  m_Name: Locomotion Aiming
   m_EditorClassIdentifier: 
   onFixed:
-  - {fileID: 11400000, guid: fde54421d30365a43af80aee734f395a, type: 2}
-  - {fileID: 11400000, guid: 85198e64839d8bc48a42b179bc1f2958, type: 2}
+  - {fileID: 11400000, guid: 22a11b4947204854988af2dc196a62ec, type: 2}
+  - {fileID: 11400000, guid: 902a582da7c68004d9f6727ea7f5ba12, type: 2}
   onUpdate:
   - {fileID: 11400000, guid: df0e2bf50d0ec6246996948cce897541, type: 2}
   - {fileID: 11400000, guid: 86ef65116588d124ab78c578479179a7, type: 2}
-  onEnter: []
-  onExit: []
+  onEnter:
+  - {fileID: 11400000, guid: 46f275e8098cc67408c1654079f9d1fb, type: 2}
+  onExit:
+  - {fileID: 11400000, guid: 29997536d2156634d87444cbb22dec1f, type: 2}
   idCount: 1
   transitions:
   - id: 0
-    condition: {fileID: 11400000, guid: 6ef766dd3ec9b3a46bc861e046067338, type: 2}
-    targetState: {fileID: 11400000, guid: 7d7d9498ca5ecd740b98314748ebdc82, type: 2}
+    condition: {fileID: 11400000, guid: 662714069e7748b4dbc03e1c27643adc, type: 2}
+    targetState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
     disable: 0
