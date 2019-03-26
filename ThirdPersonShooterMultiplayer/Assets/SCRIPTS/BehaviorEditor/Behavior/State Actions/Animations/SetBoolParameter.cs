@@ -1,17 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace StateAction
 {
-	[CreateAssetMenu (menuName = "Actions/State Animator/Set Bool Parameter")]
-	public class SetBoolParameter : StateActions
-	{
-		public string boolParameterName;
-		public bool status;
+    [CreateAssetMenu (menuName = "Actions/State Animator/Set Bool Parameter")]
+    public class SetBoolParameter : StateActions
+    {
+        public string boolParameterName;
+        public bool status;
 
-		public override void Execute (StateManager states)
-		{
-			states.animatorInstance.SetBool (boolParameterName, status);
-		}
-	}
+        [Header("Use Scriptable Object")]
+        public bool useStatusVariable = true;
+        public StateObject.BoolVariable statusVariable;
+
+        public override void Execute (StateManager states)
+        {
+            if (useStatusVariable && statusVariable != null)
+            {
+                states.animatorInstance.SetBool (boolParameterName, statusVariable.value);
+            }
+            else
+            {
+                states.animatorInstance.SetBool (boolParameterName, status);
+            }
+        }
+    }
 }

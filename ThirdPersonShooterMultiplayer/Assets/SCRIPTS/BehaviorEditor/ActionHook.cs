@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace StateAction
 {
-    public class ActionHook : MonoBehaviour
-    {
+	public class ActionHook : MonoBehaviour
+	{
 		public Action[] fixedUpdateActions;
 		public Action[] updateActions;
 
@@ -21,14 +21,14 @@ namespace StateAction
 		}
 
 		void Update()
-        {
+		{
 			if (updateActions == null)
 				return;
 
-            for (int i = 0; i < updateActions.Length; i++)
-            {
-                updateActions[i].Execute();
-            }
-        }
-    }
+			for (int i = 0; i < updateActions.Length; i++)
+			{
+				updateActions[i].Execute();
+			}
+		}
+	}
 }

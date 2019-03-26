@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0e211dd25d71a4382020495ae9a0be, type: 3}
-  m_Name: SetAimingTrue
+  m_Script: {fileID: 11500000, guid: bdfdadcaf1cc05a4ab68623d3e53ce4a, type: 3}
+  m_Name: InitControllerUpdater
   m_EditorClassIdentifier: 
-  boolParameterName: aiming
-  status: 1
-  useStatusVariable: 0
-  statusVariable: {fileID: 0}
+  stateActions:
+  - {fileID: 11400000, guid: fa435c1a941d31448b4b0297fe15c6f6, type: 2}

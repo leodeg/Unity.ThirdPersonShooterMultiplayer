@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7d2abfa9c939c48a2a8a2e82ce0a22, type: 3}
+  m_Name: SwitchFromNormalToAimingRotation
+  m_EditorClassIdentifier: 
+  targetState: {fileID: 11400000, guid: b29c268a51f3d1e40b5d35d45123786e, type: 2}
+  onFalseAction: {fileID: 11400000, guid: fde54421d30365a43af80aee734f395a, type: 2}
+  onTrueAction: {fileID: 11400000, guid: 902a582da7c68004d9f6727ea7f5ba12, type: 2}

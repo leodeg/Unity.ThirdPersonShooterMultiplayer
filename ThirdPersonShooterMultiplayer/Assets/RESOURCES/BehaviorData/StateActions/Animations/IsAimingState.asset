@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e0e211dd25d71a4382020495ae9a0be, type: 3}
-  m_Name: SetAimingTrue
+  m_Name: IsAimingState
   m_EditorClassIdentifier: 
   boolParameterName: aiming
-  status: 1
-  useStatusVariable: 0
-  statusVariable: {fileID: 0}
+  status: 0
+  useStatusVariable: 1
+  statusVariable: {fileID: 11400000, guid: b29c268a51f3d1e40b5d35d45123786e, type: 2}

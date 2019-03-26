@@ -16,6 +16,7 @@ namespace StateAction
 		public Vector3 moveDirection;
 
 		public StateObject.TransformVariable cameraTransfrom;
+		public StateObject.TransformVariable viewCameraTransfrom;
 		public StateObject.StateVariable playerStates;
 
         public override void Execute()
@@ -26,12 +27,14 @@ namespace StateAction
 			{
 				playerStates.value.movementProperties.horizontal = horizontal.value;
 				playerStates.value.movementProperties.vertical = vertical.value;
-
 				playerStates.value.movementProperties.moveAmount = moveAmount;
 				playerStates.value.movementProperties.moveDirection = moveDirection;
+				playerStates.value.movementProperties.cameraForward = cameraTransfrom.transform.forward;
+
+				Ray ray = new Ray (viewCameraTransfrom.transform.position, viewCameraTransfrom.transform.forward);
+				playerStates.value.movementProperties.aimPosition = ray.GetPoint(100);
 
 				playerStates.value.stateProperties.isAiming = aimingInput.isPressed;
-				playerStates.value.movementProperties.cameraForward = cameraTransfrom.transform.forward;
 			}
 
 			if (cameraTransfrom.transform != null)

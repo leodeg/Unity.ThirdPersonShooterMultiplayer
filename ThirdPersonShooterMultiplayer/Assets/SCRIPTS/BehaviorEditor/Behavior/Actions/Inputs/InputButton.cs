@@ -12,11 +12,14 @@ namespace StateAction
 			onDown, onCurrent, onUp
 		}
 
+        [Header("Base")]
 		public string targetInput;
 		public bool isPressed;
 		public KeyState keyState;
-		public bool updateBoolVar = true;
-		private StateObject.BoolVariable targetBoolVariable;
+
+        [Header("Pressed State")]
+		public bool updatePressedState = true;
+		public StateObject.BoolVariable currentPressedState;
 
 		public override void Execute ()
 		{
@@ -35,11 +38,11 @@ namespace StateAction
 					break;
 			}
 
-			if (updateBoolVar)
+			if (updatePressedState)
 			{
-				if (targetBoolVariable != null)
+				if (currentPressedState != null)
 				{
-					targetBoolVariable.value = isPressed;
+					currentPressedState.value = isPressed;
 				}
 			}
 		}

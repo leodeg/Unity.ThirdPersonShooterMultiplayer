@@ -6,5 +6,6 @@ namespace StateAction
 	public class StateProperties
 	{
 		public bool isAiming;
-	}
+        public bool isInteracting;
+    }
 }

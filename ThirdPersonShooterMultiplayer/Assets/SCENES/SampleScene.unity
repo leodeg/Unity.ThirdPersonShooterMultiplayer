@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 172a28f4d983f79458be5095f8262c2d,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -696,19 +697,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e08173336c77d4bbf8356471f54b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
+  initActionsBatch: {fileID: 11400000, guid: 430d7ede50e8d6c468c0f81a078b1251, type: 2}
+  stateProperties:
+    isAiming: 0
+    isInteracting: 0
   movementProperties:
     horizontal: 0
     vertical: 0
-    speed: 5
+    moveAmount: 0
     moveDirection: {x: 0, y: 0, z: 0}
-  currentState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
+    cameraForward: {x: 0, y: 0, z: 0}
+    aimPosition: {x: 0, y: 0, z: 0}
   deltaTime: 0
-  transformInstance: {fileID: 0}
-  rigidbodyInstance: {fileID: 0}
   animatorInstance: {fileID: 0}
+  rigidbodyInstance: {fileID: 0}
+  transformInstance: {fileID: 0}
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
+  animatorHook: {fileID: 0}
 --- !u!136 &1768231104
 CapsuleCollider:
   m_ObjectHideFlags: 0

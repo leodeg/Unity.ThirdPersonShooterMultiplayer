@@ -8,7 +8,12 @@ namespace StateObject
     public class BoolVariable : ScriptableObject
     {
         public bool value;
-        
+
+        private void OnEnable ()
+        {
+            value = false;
+        }
+
         public void Set(bool v)
         {
             value = v;

@@ -10,5 +10,6 @@ namespace StateAction
 		public float moveAmount;
 		public Vector3 moveDirection;
 		public Vector3 cameraForward;
+		public Vector3 aimPosition;
 	}
 }
