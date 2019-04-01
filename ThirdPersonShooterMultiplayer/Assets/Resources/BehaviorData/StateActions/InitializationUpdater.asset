@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdfdadcaf1cc05a4ab68623d3e53ce4a, type: 3}
+  m_Name: InitializationUpdater
+  m_EditorClassIdentifier: 
+  stateActions:
+  - {fileID: 11400000, guid: fa435c1a941d31448b4b0297fe15c6f6, type: 2}
+  - {fileID: 11400000, guid: 3329d1e37c0dd01469a061fbcd6edb81, type: 2}

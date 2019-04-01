@@ -8,6 +8,7 @@ namespace StateAction
 	{
 		public State currentState;
 		public StateActions initActionsBatch;
+        public Inventory inventory;
 
 		[HideInInspector] public StateProperties stateProperties;
 		[HideInInspector] public MovementProperties movementProperties;

@@ -15,7 +15,7 @@ namespace StateAction
 		public float moveAmount;
 		public Vector3 moveDirection;
 
-		public StateObject.TransformVariable cameraTransfrom;
+		public StateObject.TransformVariable holderCameraTransfrom;
 		public StateObject.TransformVariable viewCameraTransfrom;
 		public StateObject.StateVariable playerStates;
 
@@ -29,18 +29,18 @@ namespace StateAction
 				playerStates.value.movementProperties.vertical = vertical.value;
 				playerStates.value.movementProperties.moveAmount = moveAmount;
 				playerStates.value.movementProperties.moveDirection = moveDirection;
-				playerStates.value.movementProperties.cameraForward = cameraTransfrom.transform.forward;
+				playerStates.value.movementProperties.cameraForward = viewCameraTransfrom.transform.forward;
 
-				Ray ray = new Ray (viewCameraTransfrom.transform.position, viewCameraTransfrom.transform.forward);
-				playerStates.value.movementProperties.aimPosition = ray.GetPoint(100);
+				Ray aimingRay = new Ray (viewCameraTransfrom.transform.position, viewCameraTransfrom.transform.forward);
+				playerStates.value.movementProperties.aimPosition = aimingRay.GetPoint(100);
 
 				playerStates.value.stateProperties.isAiming = aimingInput.isPressed;
 			}
 
-			if (cameraTransfrom.transform != null)
+			if (viewCameraTransfrom.transform != null)
 			{
-				moveDirection = cameraTransfrom.transform.forward * vertical.value;
-				moveDirection += cameraTransfrom.transform.right * horizontal.value;
+				moveDirection = viewCameraTransfrom.transform.forward * vertical.value;
+				moveDirection += viewCameraTransfrom.transform.right * horizontal.value;
 			}
 		}
     }

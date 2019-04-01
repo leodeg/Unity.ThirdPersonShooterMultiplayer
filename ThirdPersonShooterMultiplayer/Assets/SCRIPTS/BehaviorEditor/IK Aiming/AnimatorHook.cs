@@ -7,8 +7,9 @@ namespace StateAction
     {
         #region Editor Variables
 
-        [Header("Aiming properties")]
+        [Header ("Aiming properties")]
         public Transform leftHandTarget;
+        public Transform rightHandTarget;
         public Transform shoulder;
         public Transform aimPivot;
 
@@ -21,7 +22,6 @@ namespace StateAction
         private StateManager states;
 
         // Ik targets
-        private Transform rightHandTarget;
         private Vector3 lookDirection;
         private float aimPositionDistance = 15f;
         private float shoulderRotationSpeed = 15f;
@@ -41,70 +41,79 @@ namespace StateAction
         private Vector3 offsetPosition;
         private Vector3 offsetRotation;
 
+        private Weapon currentWeapon;
         #endregion
 
-        public void Initialize(StateManager state)
+        public void Initialize (StateManager state)
         {
             states = state;
-            animator = GetComponent<Animator>();
-            
+            animator = GetComponent<Animator> ();
+
             if (shoulder == null)
             {
-                shoulder = animator.GetBoneTransform (HumanBodyBones.RightShoulder);
+                shoulder = animator.GetBoneTransform (HumanBodyBones.RightShoulder).transform;
             }
 
-            aimPivot = new GameObject().transform;
+            aimPivot = new GameObject ().transform;
             aimPivot.name = "AimPivot";
             aimPivot.parent = states.transform;
 
-            rightHandTarget = new GameObject().transform;
+            rightHandTarget = new GameObject ().transform;
             rightHandTarget.name = "RightHandTarget";
             rightHandTarget.parent = aimPivot;
 
-            states.movementProperties.aimPosition = states.transformInstance.position + transform.forward * aimPositionDistance;
-            states.movementProperties.aimPosition.y += aimPositionHeightOffset;
+            //states.movementProperties.aimPosition = states.transformInstance.position + transform.forward * aimPositionDistance;
+            //states.movementProperties.aimPosition *= aimPositionDistance;
+            //states.movementProperties.aimPosition.y += aimPositionHeightOffset;
         }
 
-        #region Unity Methods
-
-        private void OnAnimatorMove()
+        private void OnAnimatorMove ()
         {
             lookDirection = states.movementProperties.aimPosition - aimPivot.position;
-            HandleShoulder();
+            HandleShoulder ();
         }
 
-        private void OnAnimatorIK(int layerIndex)
+        private void OnAnimatorIK (int layerIndex)
         {
-            HandleWeights();
+            HandleWeights ();
 
-            animator.SetLookAtWeight(baseWeight, bodyWeight, 1, 1, 1);
-            animator.SetLookAtPosition(states.movementProperties.aimPosition);
+            animator.SetLookAtWeight (baseWeight, bodyWeight, 1, 1, 1);
+            animator.SetLookAtPosition (states.movementProperties.aimPosition);
 
             if (leftHandTarget != null)
             {
-                UpdateIK(AvatarIKGoal.LeftHand, leftHandTarget, leftHandWeight);
-                UpdateIK(AvatarIKGoal.RightHand, rightHandTarget, rightHandWeight);
+                UpdateIK (AvatarIKGoal.LeftHand, leftHandTarget, leftHandWeight);
+            }
+
+            if (rightHandTarget != null)
+            {
+                UpdateIK (AvatarIKGoal.RightHand, rightHandTarget, rightHandWeight);
             }
         }
 
-        private void UpdateIK(AvatarIKGoal goal, Transform target, float weight)
+
+        private void UpdateIK (AvatarIKGoal goal, Transform target, float weight)
         {
-            animator.SetIKPositionWeight(goal, weight);
-            animator.SetIKRotationWeight(goal, weight);
-            animator.SetIKPosition(goal, target.position);
-            animator.SetIKRotation(goal, target.rotation);
+            animator.SetIKPositionWeight (goal, weight);
+            animator.SetIKRotationWeight (goal, weight);
+            animator.SetIKPosition (goal, target.position);
+            animator.SetIKRotation (goal, target.rotation);
         }
 
-        private void Tick()
+        private void Tick ()
         {
             RecoilAnimation ();
         }
 
-        #endregion
+        public void LoadWeapon (Weapon weapon)
+        {
+            currentWeapon = weapon;
+            rightHandTarget.localPosition = weapon.rightHandPosition.value;
+            rightHandTarget.localEulerAngles = weapon.rightHandEulers.value;
+            leftHandTarget = weapon.runtimeWeapon.weaponHook.leftHandIkPosition;
+        }
 
-        #region Recoil Animation
-
-        public void RecoilAnimation()
+        public void RecoilAnimation ()
         {
             if (!recoilIsInit)
             {
@@ -114,7 +123,7 @@ namespace StateAction
             }
         }
 
-        public void RecoilActual()
+        public void RecoilActual ()
         {
             if (recoilIsInit)
             {
@@ -134,11 +143,8 @@ namespace StateAction
             }
         }
 
-        #endregion
 
-        #region Handle Base Weights
-
-        private void HandleWeights()
+        private void HandleWeights ()
         {
             if (states.stateProperties.isInteracting)
             {
@@ -148,12 +154,12 @@ namespace StateAction
                 return;
             }
 
-            float tl_weight = 0;
-            float tm_weight = 0;
+            float base_weight = 0;
+            float hand_weight = 0;
 
             if (states.stateProperties.isAiming)
             {
-                tm_weight = 1;
+                hand_weight = 1;
                 bodyWeight = 0.4f;
             }
             else
@@ -163,37 +169,33 @@ namespace StateAction
 
             leftHandWeight = (leftHandTarget != null) ? 1 : 0;
 
-            Vector3 ld = states.movementProperties.aimPosition - states.transformInstance.position;
-            float angle = Vector3.Angle(states.transformInstance.forward, ld);
+            Vector3 aimDirection = states.movementProperties.aimPosition - states.transformInstance.position;
+            float angle = Vector3.Angle (states.transformInstance.forward, aimDirection);
 
-            tl_weight = (angle < 76) ? 1 : 0;
-            if (angle > 60) tm_weight = 0;
+            base_weight = (angle < 76) ? 1 : 0;
+            if (angle > 60) hand_weight = 0;
 
             if (!states.stateProperties.isAiming)
             {
                 // TODO: set weight when character is not aiming 
             }
 
-            baseWeight = Mathf.Lerp(baseWeight, tl_weight, states.deltaTime * 1);
-            rightHandWeight = Mathf.Lerp(rightHandWeight, tm_weight, states.deltaTime * 9);
+            baseWeight = Mathf.Lerp (baseWeight, base_weight, states.deltaTime * 1);
+            rightHandWeight = Mathf.Lerp (rightHandWeight, hand_weight, states.deltaTime * 9);
         }
 
-        #endregion
-
-        #region Handle Shoulders
-
-        private void HandleShoulder()
+        private void HandleShoulder ()
         {
-            HandleShoulderPosition();
-            HandleShoulderRotation();
+            HandleShoulderPosition ();
+            HandleShoulderRotation ();
         }
 
-        private void HandleShoulderPosition()
+        private void HandleShoulderPosition ()
         {
             aimPivot.position = shoulder.position;
         }
 
-        private void HandleShoulderRotation()
+        private void HandleShoulderRotation ()
         {
             Vector3 targetDirection = lookDirection;
 
@@ -202,12 +204,9 @@ namespace StateAction
                 targetDirection = aimPivot.forward;
             }
 
-            Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
-            aimPivot.rotation = Quaternion.Slerp(aimPivot.rotation, lookRotation, states.deltaTime * shoulderRotationSpeed);
+            Quaternion lookRotation = Quaternion.LookRotation (targetDirection);
+            aimPivot.rotation = Quaternion.Slerp (aimPivot.rotation, lookRotation, states.deltaTime * shoulderRotationSpeed);
         }
-
-        #endregion
-
 
     }
 }

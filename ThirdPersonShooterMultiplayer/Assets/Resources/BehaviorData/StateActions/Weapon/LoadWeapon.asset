@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdfdadcaf1cc05a4ab68623d3e53ce4a, type: 3}
-  m_Name: InitControllerUpdater
+  m_Script: {fileID: 11500000, guid: 9c57e530924dd554483d4fc99f779387, type: 3}
+  m_Name: LoadWeapon
   m_EditorClassIdentifier: 
-  stateActions:
-  - {fileID: 11400000, guid: fa435c1a941d31448b4b0297fe15c6f6, type: 2}
