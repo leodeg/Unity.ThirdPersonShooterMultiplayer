@@ -100,7 +100,7 @@ namespace StateAction
             animator.SetIKRotation (goal, target.rotation);
         }
 
-        private void Tick ()
+        public void Tick ()
         {
             RecoilAnimation ();
         }
@@ -109,18 +109,18 @@ namespace StateAction
         {
             currentWeapon = weapon;
             rightHandTarget.localPosition = weapon.rightHandPosition.value;
-            rightHandTarget.localEulerAngles = weapon.rightHandEulers.value;
+            rightHandTarget.localEulerAngles = weapon.runtimeWeapon.modelInstance.transform.localEulerAngles;
             leftHandTarget = weapon.runtimeWeapon.weaponHook.leftHandIkPosition;
+
+            basePosition = weapon.rightHandPosition.value;
+            baseRotation = weapon.rightHandEulers.value;
         }
 
         public void RecoilAnimation ()
         {
-            if (!recoilIsInit)
-            {
-                recoilIsInit = true;
-                recoilTime = 0f;
-                offsetPosition = Vector3.zero;
-            }
+            recoilIsInit = true;
+            recoilTime = 0f;
+            offsetPosition = Vector3.zero;
         }
 
         public void RecoilActual ()
@@ -134,9 +134,8 @@ namespace StateAction
                     recoilIsInit = false;
                 }
 
-                // TODO: add offset position to recoil animation.
-                // offsetPosition = Vector3.forward * states;
-                // offsetRotation = Vector3.forward * states;
+                offsetPosition = Vector3.forward * currentWeapon.recoilZ.Evaluate (recoilTime);
+                offsetRotation = Vector3.forward * 90 * -currentWeapon.recoilY.Evaluate (recoilTime);
 
                 rightHandTarget.localPosition = basePosition + offsetPosition;
                 rightHandTarget.localEulerAngles = baseRotation + offsetRotation;

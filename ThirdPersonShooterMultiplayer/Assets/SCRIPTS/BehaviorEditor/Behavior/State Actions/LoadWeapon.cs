@@ -14,8 +14,8 @@ namespace StateAction
             weapon.Initialize ();
 
             weapon.runtimeWeapon.modelInstance.transform.parent = states.animatorInstance.GetBoneTransform (HumanBodyBones.RightHand);
-            weapon.runtimeWeapon.modelInstance.transform.localPosition = Vector3.zero;
-            weapon.runtimeWeapon.modelInstance.transform.localEulerAngles = Vector3.zero;
+            weapon.runtimeWeapon.modelInstance.transform.localPosition = states.animatorInstance.GetBoneTransform (HumanBodyBones.RightHand).localPosition;
+            weapon.runtimeWeapon.modelInstance.transform.localEulerAngles = weapon.rightHandEulers.value;
 
             states.animatorHook.LoadWeapon (weapon);
         }

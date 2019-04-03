@@ -10,6 +10,8 @@ namespace StateAction
         {
             public GameObject modelInstance;
             public WeaponHook weaponHook;
+            public float lastFired;
+
         }
 
         [Header ("Weapon Properties")]
@@ -17,10 +19,14 @@ namespace StateAction
         public int magazinesBullets = 30;
         public float fireRate = 0.3f;
 
+
         public StateObject.Vector3Variable rightHandPosition;
         public StateObject.Vector3Variable rightHandEulers;
         public GameObject modelPrefab;
         public RuntimeWeapon runtimeWeapon;
+
+        public AnimationCurve recoilY;
+        public AnimationCurve recoilZ;
 
         public void Initialize ()
         {
@@ -28,6 +34,7 @@ namespace StateAction
             runtimeWeapon.modelInstance = Instantiate (modelPrefab);
             runtimeWeapon.weaponHook = runtimeWeapon.modelInstance.GetComponent<WeaponHook> ();
             runtimeWeapon.weaponHook.Initialization ();
+            runtimeWeapon.lastFired = 0;
         }
     }
 }

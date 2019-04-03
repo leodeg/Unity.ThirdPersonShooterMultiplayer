@@ -10,9 +10,9 @@ namespace StateAction
 		public StateActions initActionsBatch;
         public Inventory inventory;
 
+		[HideInInspector] public float deltaTime;
 		[HideInInspector] public StateProperties stateProperties;
 		[HideInInspector] public MovementProperties movementProperties;
-		[HideInInspector] public float deltaTime;
 		[HideInInspector] public Animator animatorInstance;
 		[HideInInspector] public Rigidbody rigidbodyInstance;
 		[HideInInspector] public Transform transformInstance;

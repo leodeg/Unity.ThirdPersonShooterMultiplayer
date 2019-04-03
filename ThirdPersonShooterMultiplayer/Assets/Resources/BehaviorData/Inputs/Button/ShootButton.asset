@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0e211dd25d71a4382020495ae9a0be, type: 3}
-  m_Name: SetAimingTrue
+  m_Script: {fileID: 11500000, guid: dc4c395c8af0679439359258c0bdfb12, type: 3}
+  m_Name: ShootButton
   m_EditorClassIdentifier: 
-  boolParameterName: aiming
-  status: 1
-  useStatusVariable: 0
-  statusVariable: {fileID: 0}
+  targetInput: Shooting
+  isPressed: 0
+  keyState: 1
+  updatePressedState: 1
+  currentPressedState: {fileID: 11400000, guid: bc56f06178837f34ebd509e951961d71,
+    type: 2}

@@ -197,7 +197,7 @@ GameObject:
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -322,7 +322,7 @@ GameObject:
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -371,6 +371,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3fa48fa767551d341abdb53d47a870d0, type: 2}
   - {fileID: 11400000, guid: 4d52a08548a3df049941171b5f460fb4, type: 2}
   - {fileID: 11400000, guid: 4718a9435a899f54495fc30a933041f5, type: 2}
+  - {fileID: 11400000, guid: ac7c87a63d1eccc418f050ceeaf6550a, type: 2}
   updateActions: []
 --- !u!1 &1340351152
 GameObject:
@@ -385,7 +386,7 @@ GameObject:
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -733,9 +734,12 @@ MonoBehaviour:
   inventory:
     weaponID: AkmWeapon
     currentWeapon: {fileID: 0}
+  deltaTime: 0
   stateProperties:
     isAiming: 0
     isInteracting: 0
+    isShooting: 0
+    isCrouching: 0
   movementProperties:
     horizontal: 0
     vertical: 0
@@ -743,7 +747,6 @@ MonoBehaviour:
     moveDirection: {x: 0, y: 0, z: 0}
     cameraForward: {x: 0, y: 0, z: 0}
     aimPosition: {x: 0, y: 0, z: 0}
-  deltaTime: 0
   animatorInstance: {fileID: 0}
   rigidbodyInstance: {fileID: 0}
   transformInstance: {fileID: 0}

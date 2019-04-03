@@ -5,43 +5,74 @@ using UnityEngine;
 
 namespace StateAction
 {
-	[CreateAssetMenu (menuName = "Inputs/Input Manager")]
-	public class InputManager : Action
+    [CreateAssetMenu (menuName = "Inputs/Input Manager")]
+    public class InputManager : Action
     {
+        [Header ("Movement")]
         public InputAxis horizontal;
         public InputAxis vertical;
-		public InputButton aimingInput;
+        public InputButton crouchInput;
 
-		public float moveAmount;
-		public Vector3 moveDirection;
+        [Header ("Weapon")]
+        public InputButton aimingInput;
+        public InputButton shootInput;
 
-		public StateObject.TransformVariable holderCameraTransfrom;
-		public StateObject.TransformVariable viewCameraTransfrom;
-		public StateObject.StateVariable playerStates;
+        [Header ("Variables")]
+        public StateObject.TransformVariable holderCameraTransfrom;
+        public StateObject.TransformVariable viewCameraTransfrom;
+        public StateObject.StateVariable playerStates;
 
-        public override void Execute()
+        [HideInInspector] public float moveAmount;
+        [HideInInspector] public Vector3 moveDirection;
+
+        public override void Execute ()
         {
-            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal.value) + Math.Abs(vertical.value));
+            moveAmount = Mathf.Clamp01 (Mathf.Abs (horizontal.value) + Math.Abs (vertical.value));
 
-			if (playerStates.value != null)
-			{
-				playerStates.value.movementProperties.horizontal = horizontal.value;
-				playerStates.value.movementProperties.vertical = vertical.value;
-				playerStates.value.movementProperties.moveAmount = moveAmount;
-				playerStates.value.movementProperties.moveDirection = moveDirection;
-				playerStates.value.movementProperties.cameraForward = viewCameraTransfrom.transform.forward;
+            if (playerStates.value != null)
+            {
+                UpdateAxis ();
+                UpdateButtons ();
+                UpdateAimingRaycasting ();
+                UpdatePlayerMovementProperties ();
+            }
 
-				Ray aimingRay = new Ray (viewCameraTransfrom.transform.position, viewCameraTransfrom.transform.forward);
-				playerStates.value.movementProperties.aimPosition = aimingRay.GetPoint(100);
+            if (viewCameraTransfrom.transform != null)
+            {
+                UpdatePlayerMovementDirection ();
+            }
+        }
 
-				playerStates.value.stateProperties.isAiming = aimingInput.isPressed;
-			}
+        private void UpdateAxis ()
+        {
+            playerStates.value.movementProperties.horizontal = horizontal.value;
+            playerStates.value.movementProperties.vertical = vertical.value;
+        }
 
-			if (viewCameraTransfrom.transform != null)
-			{
-				moveDirection = viewCameraTransfrom.transform.forward * vertical.value;
-				moveDirection += viewCameraTransfrom.transform.right * horizontal.value;
-			}
-		}
+        private void UpdateAimingRaycasting ()
+        {
+            Ray aimingRaycasting = new Ray (viewCameraTransfrom.transform.position, viewCameraTransfrom.transform.forward);
+            playerStates.value.movementProperties.aimPosition = aimingRaycasting.GetPoint (100);
+        }
+
+        private void UpdatePlayerMovementProperties ()
+        {
+            playerStates.value.movementProperties.moveAmount = moveAmount;
+            playerStates.value.movementProperties.moveDirection = moveDirection;
+            playerStates.value.movementProperties.cameraForward = viewCameraTransfrom.transform.forward;
+        }
+
+        private void UpdateButtons ()
+        {
+            playerStates.value.stateProperties.isAiming = aimingInput.isPressed;
+            playerStates.value.stateProperties.isShooting = shootInput.isPressed;
+            playerStates.value.stateProperties.isCrouching = crouchInput.isPressed;
+        }
+
+        private void UpdatePlayerMovementDirection ()
+        {
+            moveDirection = viewCameraTransfrom.transform.forward * vertical.value;
+            moveDirection += viewCameraTransfrom.transform.right * horizontal.value;
+        }
     }
 }
