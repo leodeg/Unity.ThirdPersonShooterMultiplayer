@@ -6,7 +6,7 @@ using UnityEditor;
 
 /// <summary>
 /// Returns all assets of the wanted type
-/// </summary>
+/// </summary>  
 public static class FindAssetsByType  {
 
     public static List<T> FindAssetsOfType<T>() where T : UnityEngine.Object

@@ -197,7 +197,7 @@ GameObject:
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba0fbb4813fc444c9c4bec22d7aa221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformVariable: {fileID: 11400000, guid: f4fea6dbe017ed846aae2248872c87a9, type: 2}
+  variable: {fileID: 11400000, guid: f4fea6dbe017ed846aae2248872c87a9, type: 2}
 --- !u!1 &611700781
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ GameObject:
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba0fbb4813fc444c9c4bec22d7aa221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformVariable: {fileID: 11400000, guid: 776bd2bc021657440a9d2752c5340ecc, type: 2}
+  variable: {fileID: 11400000, guid: 776bd2bc021657440a9d2752c5340ecc, type: 2}
 --- !u!4 &906565787
 Transform:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ GameObject:
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba0fbb4813fc444c9c4bec22d7aa221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformVariable: {fileID: 11400000, guid: 1562cb4e2dd30ee4fab89f4e0d96becb, type: 2}
+  variable: {fileID: 11400000, guid: 1562cb4e2dd30ee4fab89f4e0d96becb, type: 2}
 --- !u!1 &1414538158
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,17 +729,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e08173336c77d4bbf8356471f54b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
-  initActionsBatch: {fileID: 11400000, guid: 430d7ede50e8d6c468c0f81a078b1251, type: 2}
+  setupDefaultLayerAtStart: 1
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 516
+  currentBehaviorState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503,
+    type: 2}
+  initializationUpdater: {fileID: 11400000, guid: 430d7ede50e8d6c468c0f81a078b1251,
+    type: 2}
   inventory:
     weaponID: AkmWeapon
     currentWeapon: {fileID: 0}
-  deltaTime: 0
-  stateProperties:
+  animationName:
+    rifleReloading: Rifle Reload
+  animatorParameters:
+    vertical: vertical
+    horizontal: horizontal
+    sprint: sprint
+    crouch: crouch
+    aiming: aiming
+    weaponIdle: weaponIdle
+    isInteracting: isInteracting
+  vaultData:
+    startPosition: {x: 0, y: 0, z: 0}
+    endingPosition: {x: 0, y: 0, z: 0}
+    vaultSpeed: 2
+    animationLength: 0
+    vaultTime: 0
+    isInitialized: 0
+  currentState:
     isAiming: 0
     isInteracting: 0
     isShooting: 0
+    isReloading: 0
     isCrouching: 0
+    isVaulting: 0
   movementProperties:
     horizontal: 0
     vertical: 0
@@ -747,13 +771,11 @@ MonoBehaviour:
     moveDirection: {x: 0, y: 0, z: 0}
     cameraForward: {x: 0, y: 0, z: 0}
     aimPosition: {x: 0, y: 0, z: 0}
+  deltaTime: 0
   animatorInstance: {fileID: 0}
   rigidbodyInstance: {fileID: 0}
   transformInstance: {fileID: 0}
-  ignoreLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  animatorHook: {fileID: 0}
+  animatorController: {fileID: 0}
 --- !u!136 &1768231104
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -811,7 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba0fbb4813fc444c9c4bec22d7aa221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformVariable: {fileID: 11400000, guid: 9efec4b3c9a84ba4489425b2884d328e, type: 2}
+  variable: {fileID: 11400000, guid: 9efec4b3c9a84ba4489425b2884d328e, type: 2}
 --- !u!114 &1768231108
 MonoBehaviour:
   m_ObjectHideFlags: 0

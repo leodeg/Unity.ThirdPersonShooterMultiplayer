@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc332fb266993e4b906534fbf0e4c51, type: 3}
+  m_Name: MonitorVaulting
+  m_EditorClassIdentifier: 
+  description: 
+  originOffset: 1
+  secondOriginOffset: 0.2
+  rayForwardDistance: 1
+  rayHigherForwardDistance: 1
+  rayDownDistance: 1.5
+  valutOffsetPosition: 2
+  vaultWalkClip: {fileID: 7400000, guid: 6943187c69442b24fa8abb581d6ac9da, type: 2}

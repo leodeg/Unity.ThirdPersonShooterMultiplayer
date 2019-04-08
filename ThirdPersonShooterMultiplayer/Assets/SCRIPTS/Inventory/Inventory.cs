@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
+using UnityEngine;
 
 namespace StateAction
 {
@@ -8,5 +9,10 @@ namespace StateAction
     {
         public string weaponID;
         public Weapon currentWeapon;
+
+        public void ReloadCurrentWeapon ()
+        {
+            currentWeapon.Reload ();
+        }
     }
 }

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51fb12e35ee58ad4d909b50c0f85513d, type: 3}
+  m_Name: AkmWeapon
+  m_EditorClassIdentifier: 
+  currentBullets: 100
+  maxBullets: 200
+  fireRate: 0.03
+  ammoType: {fileID: 11400000, guid: 6f5a1cf638c716343af98bae9fa784fa, type: 2}
+  rightHandPosition: {fileID: 11400000, guid: d11f181a8718b9549bf2a9a07deb3f0c, type: 2}
+  rightHandEulers: {fileID: 11400000, guid: 8fc8fec5553e77d47bf14709b64fe354, type: 2}
+  modelPrefab: {fileID: 4662269520860557803, guid: 4eb2f11b80a301a4081cc760559e8ba0,
+    type: 3}
+  recoilY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.8393235
+      outSlope: 0.8393235
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.067499995
+    - serializedVersion: 3
+      time: 0.10077142
+      value: 0.09528924
+      inSlope: -0.026987033
+      outSlope: -0.026987033
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.0811641
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.10596776
+      outSlope: -0.10596776
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilZ:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.8393235
+      outSlope: 0.8393235
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.067499995
+    - serializedVersion: 3
+      time: 0.099999994
+      value: -0.09951723
+      inSlope: 0.06357743
+      outSlope: 0.06357743
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.08555558
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.11057471
+      outSlope: 0.11057471
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
