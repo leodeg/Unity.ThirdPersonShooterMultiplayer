@@ -1,6 +1,6 @@
 #### Heat - Third Person Shooter Multiplayer
 
-This project made by following tutorial - [Third Person Shooter Multiplayer](https://www.sharpaccent.com/?c=course&id=14) via [SharpAccent](https://sharpaccent.com/)
+This project made by the following tutorial - [Third Person Shooter Multiplayer](https://www.sharpaccent.com/?c=course&id=14) via [SharpAccent](https://sharpaccent.com/)
 
 ##### Additional resources:
   * [Behavior-Editor](https://github.com/sharpaccent/Behavior-Editor)  
