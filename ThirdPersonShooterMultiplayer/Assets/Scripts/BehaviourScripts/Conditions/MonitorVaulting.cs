@@ -24,7 +24,7 @@ namespace StateAction
             origin.y += originOffset;
             Vector3 direction = state.transform.forward;
 
-            Debug.DrawRay (origin, direction * rayHigherForwardDistance);
+            Debug.DrawRay (origin, direction * rayHigherForwardDistance, Color.blue);
             if (Physics.Raycast (origin, direction, out hit, rayForwardDistance))
             {
                 Vector3 secondOrigin = origin;
@@ -34,7 +34,7 @@ namespace StateAction
                 firstHit.y -= originOffset;
                 Vector3 normalDirection = -hit.normal;
 
-                Debug.DrawRay (secondOrigin, direction * rayHigherForwardDistance);
+                Debug.DrawRay (secondOrigin, direction * rayHigherForwardDistance, Color.blue);
                 if (Physics.Raycast (secondOrigin, direction, out hit, rayHigherForwardDistance))
                 {
 
@@ -42,7 +42,7 @@ namespace StateAction
                 else
                 {
                     Vector3 thirdOrigin = secondOrigin + (direction * rayHigherForwardDistance);
-                    Debug.DrawRay (thirdOrigin, Vector3.down * rayDownDistance);
+                    Debug.DrawRay (thirdOrigin, Vector3.down * rayDownDistance, Color.green);
                     if (Physics.Raycast (thirdOrigin, Vector3.down, out hit, rayDownDistance))
                     {
                         result = true;

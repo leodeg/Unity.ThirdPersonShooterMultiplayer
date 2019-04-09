@@ -4,7 +4,7 @@ using System.Collections;
 namespace StateAction
 {
     [CreateAssetMenu (menuName = "Actions/State Action Switcher")]
-    public class StateActionSwitcher : StateActions
+    public class StateActionsSwitcher : StateActions
     {
         public StateObject.BoolVariable targetState;
         public StateActions onFalseAction;

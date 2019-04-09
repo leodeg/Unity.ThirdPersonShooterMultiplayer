@@ -31,6 +31,10 @@ namespace StateAction
         public AnimationCurve recoilY;
         public AnimationCurve recoilZ;
 
+        [Header ("Ballistics")]
+        public bool overrideBallistics;
+        public Ballistics ballistics;
+
         public void Initialize ()
         {
             properties = new WeaponProperties ();

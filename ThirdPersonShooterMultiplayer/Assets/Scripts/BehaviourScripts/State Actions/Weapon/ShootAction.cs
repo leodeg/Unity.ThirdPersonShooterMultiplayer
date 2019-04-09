@@ -50,9 +50,23 @@ namespace StateAction
                         weapon.properties.weaponController.Shoot ();
                         states.animatorController.StartRecoilAnimation ();
 
+                        if (!weapon.overrideBallistics)
+                        {
+                            if (states.ballisticActions != null)
+                            {
+                                states.ballisticActions.Execute (states, weapon);
+                            }
+                        }
+                        else
+                        {
+                            weapon.ballistics.Execute (states, weapon);
+                        }
+
                         --weapon.currentBullets;
                         if (weapon.currentBullets < 0)
+                        {
                             weapon.currentBullets = 0;
+                        }
                     }
                 }
                 else

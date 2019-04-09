@@ -6,6 +6,17 @@ namespace StateAction
 {
     public static class GameManagers
     {
+        private static ObjectPooler objectPooler;
+        public static ObjectPooler GetObjectPool ()
+        {
+            if (objectPooler == null)
+            {
+                objectPooler = Resources.Load ("ObjectPooler") as ObjectPooler;
+                objectPooler.Initialize ();
+            }
+            return objectPooler;
+        }
+
         private static ResourcesManager resourcesManager;
         public static ResourcesManager GetResourcesManager ()
         {

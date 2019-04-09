@@ -6,13 +6,15 @@ namespace StateAction
 {
     public class StateManager : MonoBehaviour
     {
-        [Header ("Ground Layer Mask")]
+        [Header ("Layer Masks")]
         public bool setupDefaultLayerAtStart = true;
         public LayerMask groundLayers;
+        public LayerMask weaponRaycastLayers;
 
         [Header ("State Properties")]
         public State currentBehaviorState;
         public StateActions initializationUpdater;
+        public Ballistics ballisticActions;
 
         [Header ("Inventory")]
         public Inventory inventory;

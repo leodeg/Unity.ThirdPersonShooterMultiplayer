@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StateAction
 {
-	public class ActionHook : MonoBehaviour
+	public class ActionUpdater : MonoBehaviour
 	{
 		public Action[] fixedUpdateActions;
 		public Action[] updateActions;
