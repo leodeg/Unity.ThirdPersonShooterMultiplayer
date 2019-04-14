@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StateAction
 {
-    public class StateManager : MonoBehaviour
+    public class StateManager : MonoBehaviour, IHittable
     {
         [Header ("Layer Masks")]
         public bool setupDefaultLayerAtStart = true;
@@ -79,6 +79,11 @@ namespace StateAction
         public void PlayAnimation (string animationName)
         {
             animatorInstance.CrossFade (animationName, 0.2f);
+        }
+
+        public void OnHit (StateManager shooter, Weapon weapon, Vector3 direction, Vector3 position)
+        {
+            throw new System.NotImplementedException ();
         }
     }
 }

@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1ff57c9243f3f4dbd1f15ee81ce93c, type: 3}
   m_Name: ObjectPooler
   m_EditorClassIdentifier: 
-  pool: []
+  pool:
+  - prefab: {fileID: 100002, guid: b8f97b0f4180f3743912e74deeb57564, type: 3}
+    budget: 5
+    currentIndex: 0
+    createdObjects: []

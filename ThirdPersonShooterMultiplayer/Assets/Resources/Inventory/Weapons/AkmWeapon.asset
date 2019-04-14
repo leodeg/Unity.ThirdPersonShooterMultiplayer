@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fb12e35ee58ad4d909b50c0f85513d, type: 3}
   m_Name: AkmWeapon
   m_EditorClassIdentifier: 
-  currentBullets: 100
+  currentBullets: 200
   maxBullets: 200
   fireRate: 0.03
   ammoType: {fileID: 11400000, guid: 6f5a1cf638c716343af98bae9fa784fa, type: 2}
@@ -86,3 +86,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  overrideBallistics: 0
+  ballistics: {fileID: 11400000, guid: 7367b9a1be7690e4ab01ea6b88214631, type: 2}

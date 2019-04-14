@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 1559773798}
   - component: {fileID: 1559773797}
   - component: {fileID: 1559773796}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,11 +732,15 @@ MonoBehaviour:
   setupDefaultLayerAtStart: 1
   groundLayers:
     serializedVersion: 2
-    m_Bits: 516
+    m_Bits: 1540
+  weaponRaycastLayers:
+    serializedVersion: 2
+    m_Bits: 1536
   currentBehaviorState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503,
     type: 2}
   initializationUpdater: {fileID: 11400000, guid: 430d7ede50e8d6c468c0f81a078b1251,
     type: 2}
+  ballisticActions: {fileID: 11400000, guid: 7367b9a1be7690e4ab01ea6b88214631, type: 2}
   inventory:
     weaponID: AkmWeapon
     currentWeapon: {fileID: 0}

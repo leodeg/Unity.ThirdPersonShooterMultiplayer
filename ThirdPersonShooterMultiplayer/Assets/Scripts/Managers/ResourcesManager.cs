@@ -8,6 +8,8 @@ namespace StateAction
     public class ResourcesManager : ScriptableObject
     {
         public List<Item> itemList = new List<Item> ();
+        public RoomVariable currentRoom;
+
         private Dictionary<string, Item> itemDictionary = new Dictionary<string, Item> ();
 
         public void Initialize ()

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemList:
   - {fileID: 11400000, guid: 9769ba34857de0a46a0203c27d1cded0, type: 2}
+  currentRoom: {fileID: 11400000, guid: 823ecada52d72d646b273009137c88b1, type: 2}

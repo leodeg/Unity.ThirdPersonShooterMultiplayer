@@ -16,12 +16,29 @@ namespace StateAction
             Ray ray = new Ray (origin, direction);
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, raycastDistance, states.weaponRaycastLayers))
+            Debug.DrawRay (origin, direction * raycastDistance, Color.red);
+            if (Physics.Raycast (ray, out hit, raycastDistance, states.weaponRaycastLayers))
             {
-                GameObject hitParticle = GameManagers.GetObjectPool ().GetObject (particleName);
-                Quaternion rotation = Quaternion.LookRotation (-direction);
-                hitParticle.transform.position = hit.point;
-                hitParticle.transform.rotation = rotation;
+                Debug.Log ("Hit name: " + hit.transform.name);
+                IHittable isHittable = hit.transform.GetComponentInParent<IHittable> ();
+                if (isHittable == null)
+                {
+                    GameObject hitParticle = GameManagers.GetObjectPool ().GetObject (particleName);
+                    if (hitParticle != null)
+                    {
+                        Quaternion rotation = Quaternion.LookRotation (-direction);
+                        hitParticle.transform.position = hit.point;
+                        hitParticle.transform.rotation = rotation;
+                    }
+                    else
+                    {
+                        Debug.LogWarning ("RayBallistics::ERROR::Hit particle is null.");
+                    }
+                }
+                else
+                {
+                    isHittable.OnHit (states, weapon, direction, hit.point);
+                }
             }
         }
     }

@@ -15,6 +15,5 @@ MonoBehaviour:
   targetInput: Aiming
   isPressed: 0
   keyState: 1
-  updatePressedState: 1
-  currentPressedState: {fileID: 11400000, guid: b29c268a51f3d1e40b5d35d45123786e,
-    type: 2}
+  updateBoolVariable: 1
+  boolVariable: {fileID: 11400000, guid: b29c268a51f3d1e40b5d35d45123786e, type: 2}

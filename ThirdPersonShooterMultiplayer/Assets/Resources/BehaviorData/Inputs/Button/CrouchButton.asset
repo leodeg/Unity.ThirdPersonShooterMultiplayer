@@ -15,6 +15,5 @@ MonoBehaviour:
   targetInput: Crouching
   isPressed: 0
   keyState: 1
-  updatePressedState: 1
-  currentPressedState: {fileID: 11400000, guid: 8f787f4990d1724438b192bd828a0f00,
-    type: 2}
+  updateBoolVariable: 1
+  boolVariable: {fileID: 11400000, guid: 8f787f4990d1724438b192bd828a0f00, type: 2}

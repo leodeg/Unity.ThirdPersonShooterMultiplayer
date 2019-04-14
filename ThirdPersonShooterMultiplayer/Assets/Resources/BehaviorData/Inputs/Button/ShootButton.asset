@@ -15,6 +15,5 @@ MonoBehaviour:
   targetInput: Shooting
   isPressed: 0
   keyState: 1
-  updatePressedState: 1
-  currentPressedState: {fileID: 11400000, guid: bc56f06178837f34ebd509e951961d71,
-    type: 2}
+  updateBoolVariable: 1
+  boolVariable: {fileID: 11400000, guid: bc56f06178837f34ebd509e951961d71, type: 2}

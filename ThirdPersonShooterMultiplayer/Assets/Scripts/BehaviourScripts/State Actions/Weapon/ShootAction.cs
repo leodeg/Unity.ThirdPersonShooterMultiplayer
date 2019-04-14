@@ -56,6 +56,10 @@ namespace StateAction
                             {
                                 states.ballisticActions.Execute (states, weapon);
                             }
+                            else
+                            {
+                                Debug.LogError ("ShootAction::ERROR::Ballistics is null.");
+                            }
                         }
                         else
                         {

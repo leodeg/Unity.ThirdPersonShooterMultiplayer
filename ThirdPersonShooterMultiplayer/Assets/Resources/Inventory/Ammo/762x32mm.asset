@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d14fb85342bf147b7c55ae9d21d73b, type: 3}
   m_Name: 762x32mm
   m_EditorClassIdentifier: 
-  carryingAmount: 10
+  carryingAmount: 500

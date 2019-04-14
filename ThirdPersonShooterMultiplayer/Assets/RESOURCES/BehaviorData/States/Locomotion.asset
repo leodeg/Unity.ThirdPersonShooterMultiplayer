@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Locomotion
   m_EditorClassIdentifier: 
   onFixed:
-  - {fileID: 11400000, guid: cdc571b8859670441945e2c92d817cc7, type: 2}
   - {fileID: 11400000, guid: 02c7e0c8ce7bf154ab255a20e2e58705, type: 2}
+  - {fileID: 11400000, guid: cdc571b8859670441945e2c92d817cc7, type: 2}
   onUpdate:
   - {fileID: 11400000, guid: df0e2bf50d0ec6246996948cce897541, type: 2}
   - {fileID: 11400000, guid: 8fba9fa9d557eb24fb241769caba016d, type: 2}
   - {fileID: 11400000, guid: 0aff49d29a1daf94cb96121f7890bc3a, type: 2}
-  - {fileID: 11400000, guid: e6e9e3ca7717eff489b66c668fc4abdf, type: 2}
   onEnter: []
   onExit: []
   idCount: 2

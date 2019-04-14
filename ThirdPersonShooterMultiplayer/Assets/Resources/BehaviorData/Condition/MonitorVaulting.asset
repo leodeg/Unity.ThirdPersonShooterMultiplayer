@@ -17,6 +17,6 @@ MonoBehaviour:
   secondOriginOffset: 0.2
   rayForwardDistance: 1
   rayHigherForwardDistance: 1
-  rayDownDistance: 1.5
+  rayDownDistance: 1.7
   valutOffsetPosition: 2
   vaultWalkClip: {fileID: 7400000, guid: 6943187c69442b24fa8abb581d6ac9da, type: 2}
