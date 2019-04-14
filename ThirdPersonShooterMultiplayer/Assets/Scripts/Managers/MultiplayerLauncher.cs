@@ -15,6 +15,7 @@ namespace StateAction
         public string mainMenuName = "Main";
         public StateObject.GameEvent onConnectedToMaster;
         public StateObject.BoolVariable isConnected;
+        public StateObject.BoolVariable isMultiplayer;
 
         private bool isLoading;
         private delegate void OnSceneLoaded ();
@@ -59,7 +60,7 @@ namespace StateAction
         }
 
         #endregion
-         
+
         #region Photon Callbacks
 
         private void OnConnectedToServer ()
@@ -75,13 +76,31 @@ namespace StateAction
             Debug.LogError (error.ToString ());
         }
 
+        public override void OnCreatedRoom ()
+        {
+            Room room = ScriptableObject.CreateInstance<Room> ();
+
+            object sceneName = null;
+            PhotonNetwork.room.CustomProperties.TryGetValue ("scene", out sceneName);
+            room.sceneName = (string)sceneName;
+            room.roomName = PhotonNetwork.room.Name;
+
+            GameManagers.GetResourcesManager ().currentRoom.value = room;
+            Debug.Log ("OnCreatedRoom");
+        }
+
+        public override void OnJoinedRoom ()
+        {
+
+        }
+
         #endregion
 
         #region Manager Methods
 
         public void LoadMainMenu ()
         {
-            StartCoroutine (LoadScene(mainMenuName, OnMainMenu));
+            StartCoroutine (LoadScene (mainMenuName, OnMainMenu));
         }
 
         public void LoadCurrentRoom ()
@@ -92,6 +111,34 @@ namespace StateAction
             {
                 isLoading = true;
                 StartCoroutine (LoadScene (room.sceneName));
+            }
+        }
+
+        public void CreateRoom (RoomButton button)
+        {
+            if (isMultiplayer.value)
+            {
+                if (!isConnected.value)
+                {
+                    // TODO: add logic for when not connected
+
+                }
+                else
+                {
+                    RoomOptions roomOptions = new RoomOptions ();
+                    roomOptions.MaxPlayers = 5;
+                    roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable
+                    {
+                        {"scene", button.sceneName }
+                    };
+                    PhotonNetwork.CreateRoom (null, roomOptions, TypedLobby.Default);
+                }
+            }
+            else // single player
+            {
+                Room room = ScriptableObject.CreateInstance<Room> ();
+                room.sceneName = button.sceneName;
+                GameManagers.GetResourcesManager ().currentRoom.SetRoom (room);
             }
         }
 
