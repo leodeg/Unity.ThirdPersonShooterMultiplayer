@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using StateAction;
 
-namespace StateAction
+namespace Managers
 {
     [CreateAssetMenu (menuName = "Managers/Ammo Manager")]
     public class AmmoManager : ScriptableObject

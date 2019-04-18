@@ -43,7 +43,7 @@ namespace StateAction
             properties.weaponController.Initialization ();
             properties.lastFireTime = 0;
 
-            ammoType = GameManagers.GetAmmoManager ().GetAmmo (ammoType.name);
+            ammoType = Managers.GameManagers.GetAmmoManager ().GetAmmo (ammoType.name);
         }
 
         public void Reload ()

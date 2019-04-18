@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace StateAction
+namespace Multiplayer
 {
     [CreateAssetMenu (menuName = "Multiplayer/Room")]
     public class Room : ScriptableObject

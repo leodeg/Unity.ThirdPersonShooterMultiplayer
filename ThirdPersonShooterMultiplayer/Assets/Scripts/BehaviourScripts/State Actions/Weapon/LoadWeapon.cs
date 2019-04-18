@@ -8,7 +8,7 @@ namespace StateAction
     {
         public override void Execute (StateManager states)
         {
-            ResourcesManager manager = GameManagers.GetResourcesManager ();
+            Managers.ResourcesManager manager = Managers.GameManagers.GetResourcesManager ();
             Weapon weapon = manager.GetItemInstance (states.inventory.weaponID) as Weapon;
             states.inventory.currentWeapon = weapon;
             weapon.Initialize ();

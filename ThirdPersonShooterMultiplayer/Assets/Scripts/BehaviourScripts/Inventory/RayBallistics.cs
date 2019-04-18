@@ -23,7 +23,7 @@ namespace StateAction
                 IHittable isHittable = hit.transform.GetComponentInParent<IHittable> ();
                 if (isHittable == null)
                 {
-                    GameObject hitParticle = GameManagers.GetObjectPool ().GetObject (particleName);
+                    GameObject hitParticle = Managers.GameManagers.GetObjectPool ().GetObject (particleName);
                     if (hitParticle != null)
                     {
                         Quaternion rotation = Quaternion.LookRotation (-direction);

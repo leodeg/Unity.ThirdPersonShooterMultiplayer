@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace StateAction
+namespace Managers
 {
     public static class GameManagers
     {

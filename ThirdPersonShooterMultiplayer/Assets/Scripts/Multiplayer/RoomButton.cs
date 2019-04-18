@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace StateAction
+namespace Multiplayer
 {
     public class RoomButton : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace StateAction
 
         public void OnClick ()
         {
-            GameManagers.GetResourcesManager ().currentRoom.SetRoomButton (this);
+            Managers.GameManagers.GetResourcesManager ().currentRoom.SetRoomButton (this);
         }
     }
 }

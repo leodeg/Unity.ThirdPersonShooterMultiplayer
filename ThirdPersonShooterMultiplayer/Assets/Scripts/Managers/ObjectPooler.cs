@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace StateAction
+namespace Managers
 {
     [System.Serializable]
     public class Pool

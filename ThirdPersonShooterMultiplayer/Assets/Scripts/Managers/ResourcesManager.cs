@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateAction;
 
-namespace StateAction
+namespace Managers
 {
     [CreateAssetMenu (menuName = "Managers/Resources Manager")]
     public class ResourcesManager : ScriptableObject
     {
         public List<Item> itemList = new List<Item> ();
-        public RoomVariable currentRoom;
+        public Multiplayer.RoomVariable currentRoom;
 
         private Dictionary<string, Item> itemDictionary = new Dictionary<string, Item> ();
 

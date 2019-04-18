@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace StateAction
+namespace Managers
 {
     public class MultiplayerLauncher : Photon.PunBehaviour
     {
@@ -14,6 +14,7 @@ namespace StateAction
         [Header ("Variables")]
         public string mainMenuName = "Main";
         public StateObject.GameEvent onConnectedToMaster;
+        public StateObject.GameEvent onJoinedRoom;
         public StateObject.BoolVariable isConnected;
         public StateObject.BoolVariable isMultiplayer;
 
@@ -24,8 +25,15 @@ namespace StateAction
 
         private void Awake ()
         {
-            if (singleton == null) singleton = this;
-            else Destroy (this.gameObject);
+            if (singleton == null)
+            {
+                singleton = this;
+                DontDestroyOnLoad (this.gameObject);
+            }
+            else
+            {
+                Destroy (this.gameObject);
+            }
         }
 
         private void Start ()
@@ -76,9 +84,14 @@ namespace StateAction
             Debug.LogError (error.ToString ());
         }
 
+        private void InstantiateMultiplayerManager ()
+        {
+            PhotonNetwork.Instantiate ("MultiplayerManager", Vector3.zero, Quaternion.identity, 0);
+        }
+
         public override void OnCreatedRoom ()
         {
-            Room room = ScriptableObject.CreateInstance<Room> ();
+            Multiplayer.Room room = ScriptableObject.CreateInstance<Multiplayer.Room> ();
 
             object sceneName = null;
             PhotonNetwork.room.CustomProperties.TryGetValue ("scene", out sceneName);
@@ -86,13 +99,17 @@ namespace StateAction
             room.roomName = PhotonNetwork.room.Name;
 
             GameManagers.GetResourcesManager ().currentRoom.value = room;
-            Debug.Log ("OnCreatedRoom");
+            Debug.Log ("MultiplayerLauncher::OnCreatedRoom::Complete");
         }
 
         public override void OnJoinedRoom ()
         {
-
+            onJoinedRoom.Raise ();
+            InstantiateMultiplayerManager ();
+            Debug.Log ("MultiplayerLauncher::OnJoinedRoom::Complete");
         }
+
+
 
         #endregion
 
@@ -105,7 +122,7 @@ namespace StateAction
 
         public void LoadCurrentRoom ()
         {
-            Room room = GameManagers.GetResourcesManager ().currentRoom.value;
+            Multiplayer.Room room = GameManagers.GetResourcesManager ().currentRoom.value;
 
             if (!isLoading)
             {
@@ -114,7 +131,7 @@ namespace StateAction
             }
         }
 
-        public void CreateRoom (RoomButton button)
+        public void CreateRoom (Multiplayer.RoomButton button)
         {
             if (isMultiplayer.value)
             {
@@ -136,7 +153,7 @@ namespace StateAction
             }
             else // single player
             {
-                Room room = ScriptableObject.CreateInstance<Room> ();
+                Multiplayer.Room room = ScriptableObject.CreateInstance<Multiplayer.Room> ();
                 room.sceneName = button.sceneName;
                 GameManagers.GetResourcesManager ().currentRoom.SetRoom (room);
             }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateAction
+namespace Multiplayer
 {
     [CreateAssetMenu (menuName = "Multiplayer/Room Variable")]
     public class RoomVariable : ScriptableObject
@@ -32,7 +32,7 @@ namespace StateAction
             }
             else
             {
-                MultiplayerLauncher.singleton.CreateRoom (button);
+                Managers.MultiplayerLauncher.singleton.CreateRoom (button);
             }
         }
 
