@@ -36,7 +36,7 @@ namespace Multiplayer
             PlayerHolder playerHolder = new PlayerHolder ()
             {
                 photonID = networkPrint.photonId,
-                print = networkPrint
+                networkPrint = networkPrint
             };
 
             players.Add (playerHolder);

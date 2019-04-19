@@ -15,5 +15,11 @@ namespace Multiplayer
             isLocal = photonView.isMine;
             manager.AddNewPlayer (this);
         }
+
+        public void InstantiateControllers (int spawnPositionIndex)
+        {
+            GameObject inputUpdater = Instantiate (Resources.Load ("InputUpdater")) as GameObject;
+            PhotonNetwork.Instantiate ("MultiplayerController", Vector3.zero, Quaternion.identity, 0);
+        }
     }
 }

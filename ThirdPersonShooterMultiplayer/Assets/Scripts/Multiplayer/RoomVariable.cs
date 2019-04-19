@@ -32,7 +32,7 @@ namespace Multiplayer
             }
             else
             {
-                Managers.MultiplayerLauncher.singleton.CreateRoom (button);
+                Managers.MultiplayerLauncher.Singleton.CreateRoom (button);
             }
         }
 

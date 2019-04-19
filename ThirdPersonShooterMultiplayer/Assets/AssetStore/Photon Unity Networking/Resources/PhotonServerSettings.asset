@@ -37,4 +37,7 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - RPCCreateControllers
+  - RPCSceneChange
+  - RPCSetSpawnPositionToPlayer
   DisableAutoOpenWizard: 1

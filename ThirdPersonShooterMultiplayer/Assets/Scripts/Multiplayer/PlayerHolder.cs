@@ -7,6 +7,7 @@ namespace Multiplayer
     {
         public int photonID;
         public string userName;
-        public NetworkPrint print;
+        public int spawnPosition;
+        public NetworkPrint networkPrint;
     }
 }

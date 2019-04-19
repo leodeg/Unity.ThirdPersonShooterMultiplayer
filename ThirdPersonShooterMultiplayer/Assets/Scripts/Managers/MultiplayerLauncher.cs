@@ -7,7 +7,7 @@ namespace Managers
     public class MultiplayerLauncher : Photon.PunBehaviour
     {
         [Header ("Multiplayer")]
-        public static MultiplayerLauncher singleton;
+        public static MultiplayerLauncher Singleton;
         public uint gameVersion = 1;
         public PhotonLogLevel logLevel = PhotonLogLevel.ErrorsOnly;
 
@@ -18,16 +18,18 @@ namespace Managers
         public StateObject.BoolVariable isConnected;
         public StateObject.BoolVariable isMultiplayer;
 
+        public delegate void OnSceneLoaded ();
+        public OnSceneLoaded onSceneLoadedCallback;
+
         private bool isLoading;
-        private delegate void OnSceneLoaded ();
 
         #region Initialize
 
         private void Awake ()
         {
-            if (singleton == null)
+            if (Singleton == null)
             {
-                singleton = this;
+                Singleton = this;
                 DontDestroyOnLoad (this.gameObject);
             }
             else
@@ -109,8 +111,6 @@ namespace Managers
             Debug.Log ("MultiplayerLauncher::OnJoinedRoom::Complete");
         }
 
-
-
         #endregion
 
         #region Manager Methods
@@ -122,13 +122,40 @@ namespace Managers
 
         public void LoadCurrentRoom ()
         {
+            if (isConnected)
+            {
+                Multiplayer.MultiplayerManager.Singleton.BroadcastSceneChange ();
+            }
+            else
+            {
+                Multiplayer.Room room = GameManagers.GetResourcesManager ().currentRoom.value;
+
+                if (!isLoading)
+                {
+                    isLoading = true;
+                    StartCoroutine (LoadScene (room.sceneName));
+                }
+            }
+        }
+
+        public void LoadCurrentSceneActual (OnSceneLoaded callback = null)
+        {
             Multiplayer.Room room = GameManagers.GetResourcesManager ().currentRoom.value;
 
             if (!isLoading)
             {
                 isLoading = true;
-                StartCoroutine (LoadScene (room.sceneName));
+                StartCoroutine (LoadScene (room.sceneName, onSceneLoadedCallback));
             }
+        }
+
+        private IEnumerator LoadScene (string targetLevel, OnSceneLoaded callback = null)
+        {
+            yield return SceneManager.LoadSceneAsync (targetLevel, LoadSceneMode.Single);
+            isLoading = false;
+
+            if (callback != null)
+                callback.Invoke ();
         }
 
         public void CreateRoom (Multiplayer.RoomButton button)
@@ -138,16 +165,16 @@ namespace Managers
                 if (!isConnected.value)
                 {
                     // TODO: add logic for when not connected
-
                 }
                 else
                 {
-                    RoomOptions roomOptions = new RoomOptions ();
-                    roomOptions.MaxPlayers = 5;
-                    roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable
-                    {
-                        {"scene", button.sceneName }
+                    RoomOptions roomOptions = new RoomOptions () {
+                        MaxPlayers = 5,
+                        CustomRoomProperties = new ExitGames.Client.Photon.Hashtable {
+                            {"scene", button.sceneName }
+                        }
                     };
+
                     PhotonNetwork.CreateRoom (null, roomOptions, TypedLobby.Default);
                 }
             }
@@ -157,13 +184,6 @@ namespace Managers
                 room.sceneName = button.sceneName;
                 GameManagers.GetResourcesManager ().currentRoom.SetRoom (room);
             }
-        }
-
-        private IEnumerator LoadScene (string targetLevel, OnSceneLoaded callback = null)
-        {
-            yield return SceneManager.LoadSceneAsync (targetLevel, LoadSceneMode.Single);
-            isLoading = false;
-            callback?.Invoke ();
         }
 
         #endregion
