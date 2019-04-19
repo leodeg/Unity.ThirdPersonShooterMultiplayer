@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
-  m_Name: Locomotion
+  m_Name: LocalState
   m_EditorClassIdentifier: 
   onFixed:
   - {fileID: 11400000, guid: 02c7e0c8ce7bf154ab255a20e2e58705, type: 2}

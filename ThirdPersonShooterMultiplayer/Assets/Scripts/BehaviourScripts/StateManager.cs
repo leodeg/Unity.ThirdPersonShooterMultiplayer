@@ -13,7 +13,6 @@ namespace StateAction
 
         [Header ("State Properties")]
         public State currentBehaviorState;
-        public StateActions initializationUpdater;
         public Ballistics ballisticActions;
 
         [Header ("Inventory")]
@@ -40,21 +39,6 @@ namespace StateAction
 
         private void Start ()
         {
-            if (setupDefaultLayerAtStart)
-            {
-                groundLayers = ~(1 << 9 | 1 << 3);
-            }
-
-            transformInstance = this.transform;
-            animatorInstance = GameObject.FindGameObjectWithTag ("Player").GetComponent<Animator> ();
-
-            rigidbodyInstance = GetComponent<Rigidbody> ();
-            rigidbodyInstance.drag = 4;
-            rigidbodyInstance.angularDrag = 999;
-            rigidbodyInstance.constraints = RigidbodyConstraints.FreezeRotation;
-
-            initializationUpdater.Execute (this);
-
             animationHashes = new AnimationHashes ();
         }
 
@@ -70,10 +54,19 @@ namespace StateAction
         private void Update ()
         {
             deltaTime = Time.deltaTime;
+
             if (currentBehaviorState != null)
-            {
                 currentBehaviorState.Tick (this);
-            }
+        }
+
+        public void SetCurrentState (State state)
+        {
+            if (state != null)
+                currentBehaviorState.OnExit (this);
+
+            currentBehaviorState = state;
+            currentBehaviorState.OnEnter (this);
+
         }
 
         public void PlayAnimation (string animationName)

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 711dbd0dcc0707448ad710a82f0aa6b6, type: 3}
-  m_Name: Graph
+  m_Name: PlayerGraph
   m_EditorClassIdentifier: 
   windows:
   - id: 0
     drawNode: {fileID: 11400000, guid: 3de6cb72c5d54a842957b3d8754294e2, type: 2}
     windowRect:
       serializedVersion: 2
-      x: 64
-      y: 152.6
+      x: 49.60002
+      y: 102.799904
       width: 200
-      height: 410
+      height: 390
     windowTitle: State
     enterNode: 0
     targetNode: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
     drawNode: {fileID: 11400000, guid: 3de6cb72c5d54a842957b3d8754294e2, type: 2}
     windowRect:
       serializedVersion: 2
-      x: 534
-      y: 153
+      x: 519.6001
+      y: 103.1999
       width: 200
       height: 310
     windowTitle: State
@@ -69,8 +69,8 @@ MonoBehaviour:
     drawNode: {fileID: 11400000, guid: 02d1192eec6276044a75147866515bb8, type: 2}
     windowRect:
       serializedVersion: 2
-      x: 292
-      y: 152
+      x: 277.5999
+      y: 102.1999
       width: 200
       height: 100
     windowTitle: Condition
@@ -96,8 +96,8 @@ MonoBehaviour:
     drawNode: {fileID: 11400000, guid: 02d1192eec6276044a75147866515bb8, type: 2}
     windowRect:
       serializedVersion: 2
-      x: 774
-      y: 151
+      x: 759.5999
+      y: 100.199905
       width: 200
       height: 100
     windowTitle: Condition
@@ -123,8 +123,8 @@ MonoBehaviour:
     drawNode: {fileID: 11400000, guid: 765a518b20d9ed8449bf9d452b8f6306, type: 2}
     windowRect:
       serializedVersion: 2
-      x: 827
-      y: 276
+      x: 861.5999
+      y: 278.1999
       width: 100
       height: 80
     windowTitle: Portal
@@ -140,8 +140,8 @@ MonoBehaviour:
     showEnterExit: 0
     previousCollapse: 0
     stateReference:
-      currentState: {fileID: 11400000, guid: 6a879a84044559d4b82d9031925b3180, type: 2}
-      previousState: {fileID: 11400000, guid: 6a879a84044559d4b82d9031925b3180, type: 2}
+      currentState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
+      previousState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
     transRef:
       previousCondition: {fileID: 0}
       transitionId: 0

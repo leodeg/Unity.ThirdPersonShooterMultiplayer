@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
-  m_Name: Vaulting
+  m_Name: VaultingState
   m_EditorClassIdentifier: 
   onFixed: []
   onUpdate:
@@ -21,5 +21,5 @@ MonoBehaviour:
   transitions:
   - id: 0
     condition: {fileID: 11400000, guid: 102acac4ef511c346b7cf3d033830452, type: 2}
-    targetState: {fileID: 11400000}
+    targetState: {fileID: 11400000, guid: 618d5348e34a3294194160b0e3f40503, type: 2}
     disable: 0

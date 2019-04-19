@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdfdadcaf1cc05a4ab68623d3e53ce4a, type: 3}
-  m_Name: InitializationUpdater
+  m_Script: {fileID: 11500000, guid: 3427401ec66171b4697dbb5917d5b4b8, type: 3}
+  m_Name: InitClientController
   m_EditorClassIdentifier: 
-  stateActions:
-  - {fileID: 11400000, guid: fa435c1a941d31448b4b0297fe15c6f6, type: 2}
-  - {fileID: 11400000, guid: 3329d1e37c0dd01469a061fbcd6edb81, type: 2}
+  updater: {fileID: 11400000, guid: 430d7ede50e8d6c468c0f81a078b1251, type: 2}
