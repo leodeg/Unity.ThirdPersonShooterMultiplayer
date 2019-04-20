@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Multiplayer;
 
 namespace StateAction
 {
@@ -27,6 +28,8 @@ namespace StateAction
         public VaultData vaultData;
         public StateProperties currentState;
 
+        [Header ("Multiplayer")]
+        public MultiplayerListener multiplayerListener;
 
         [HideInInspector] public MovementProperties movementProperties;
         [HideInInspector] public float deltaTime;

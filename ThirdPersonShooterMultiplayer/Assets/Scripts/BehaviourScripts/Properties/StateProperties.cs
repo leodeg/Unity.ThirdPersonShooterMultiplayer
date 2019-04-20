@@ -5,12 +5,13 @@ namespace StateAction
 	[System.Serializable]
 	public class StateProperties
 	{
+        public bool isLocal;
 		public bool isAiming;
-        public bool isInteracting;
+        public bool isVaulting;
         public bool isShooting;
         public bool isReloading;
         public bool isCrouching;
-        public bool isVaulting;
+        public bool isInteracting;
 
         public void SetCrouching ()
         {
