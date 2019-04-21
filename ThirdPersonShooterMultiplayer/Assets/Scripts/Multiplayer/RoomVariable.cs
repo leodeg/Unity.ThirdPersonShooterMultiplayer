@@ -14,7 +14,10 @@ namespace Multiplayer
         public void JoinGame ()
         {
             if (roomButtonVariable.value == null)
+            {
+                Debug.LogError ("RoomVariable::ERROR::Room button variable is null!");
                 return;
+            }
 
             SetRoom (roomButtonVariable.value);
         }
@@ -24,15 +27,16 @@ namespace Multiplayer
             value = room;
         }
 
-        public void SetRoom (RoomButton button)
+        public void SetRoom (RoomButton roomButton)
         {
-            if (button.isRoomCreated)
+            if (roomButton.isRoomCreated)
             {
-                SetRoom (button.room);
+                SetRoom (roomButton.room);
+                Managers.MultiplayerLauncher.Singleton.JoinRoom (roomButton.roomInfo);
             }
             else
             {
-                Managers.MultiplayerLauncher.Singleton.CreateRoom (button);
+                Managers.MultiplayerLauncher.Singleton.CreateRoom (roomButton);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Multiplayer;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,7 @@ namespace Managers
         public OnSceneLoaded onSceneLoadedCallback;
 
         private bool isLoading;
+        private bool isInGame;
 
         #region Initialize
 
@@ -111,20 +113,51 @@ namespace Managers
             Debug.Log ("MultiplayerLauncher::OnJoinedRoom::Complete");
         }
 
+        public override void OnJoinedLobby ()
+        {
+            StartCoroutine (RoomCheck ());
+        }
+
+        private IEnumerator RoomCheck ()
+        {
+            yield return new WaitForSeconds (3);
+
+            if (!isInGame)
+            {
+                MatchMakingManager manager = MatchMakingManager.Singleton;
+                RoomInfo[] rooms = PhotonNetwork.GetRoomList ();
+                manager.AddMatches (rooms);
+
+                yield return new WaitForSeconds (5);
+                StartCoroutine (RoomCheck ());
+            }
+        }
+
         #endregion
 
         #region Manager Methods
+
+        public void JoinLobby ()
+        {
+            PhotonNetwork.JoinLobby ();
+        }
 
         public void LoadMainMenu ()
         {
             StartCoroutine (LoadScene (mainMenuName, OnMainMenu));
         }
 
+        public void JoinRoom (RoomInfo roomInfo)
+        {
+            PhotonNetwork.JoinRoom (roomInfo.Name);
+            isInGame = true;
+        }
+
         public void LoadCurrentRoom ()
         {
             if (isConnected)
             {
-                Multiplayer.MultiplayerManager.Singleton.BroadcastSceneChange ();
+                MultiplayerManager.Singleton.BroadcastSceneChange ();
             }
             else
             {
@@ -168,7 +201,8 @@ namespace Managers
                 }
                 else
                 {
-                    RoomOptions roomOptions = new RoomOptions () {
+                    RoomOptions roomOptions = new RoomOptions ()
+                    {
                         MaxPlayers = 5,
                         CustomRoomProperties = new ExitGames.Client.Photon.Hashtable {
                             {"scene", button.sceneName }
@@ -184,6 +218,8 @@ namespace Managers
                 room.sceneName = button.sceneName;
                 GameManagers.GetResourcesManager ().currentRoom.SetRoom (room);
             }
+
+            isInGame = true;
         }
 
         #endregion

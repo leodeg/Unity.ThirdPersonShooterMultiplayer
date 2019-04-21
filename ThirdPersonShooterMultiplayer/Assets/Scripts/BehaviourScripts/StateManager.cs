@@ -30,6 +30,8 @@ namespace StateAction
 
         [Header ("Multiplayer")]
         public MultiplayerListener multiplayerListener;
+        public bool isOfflineController;
+        public StateActions offlineActions;
 
         [HideInInspector] public MovementProperties movementProperties;
         [HideInInspector] public float deltaTime;
@@ -43,6 +45,12 @@ namespace StateAction
         private void Start ()
         {
             animationHashes = new AnimationHashes ();
+            rigidbodyInstance = GetComponent<Rigidbody> ();
+
+            if (isOfflineController)
+            {
+                offlineActions.Execute (this);
+            }
         }
 
         private void FixedUpdate ()

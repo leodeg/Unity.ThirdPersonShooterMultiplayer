@@ -12,6 +12,7 @@ namespace StateAction
         public bool isReloading;
         public bool isCrouching;
         public bool isInteracting;
+        internal bool isGround;
 
         public void SetCrouching ()
         {

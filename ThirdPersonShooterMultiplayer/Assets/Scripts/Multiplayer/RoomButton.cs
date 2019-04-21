@@ -8,6 +8,8 @@ namespace Multiplayer
         public bool isRoomCreated;
         public Room room;
         public string sceneName = "level1";
+        public RoomInfo roomInfo;
+        public bool isValid;
 
         public void OnClick ()
         {

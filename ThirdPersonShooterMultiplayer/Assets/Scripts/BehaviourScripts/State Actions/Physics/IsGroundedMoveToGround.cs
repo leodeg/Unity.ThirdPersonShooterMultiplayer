@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace StateAction
 {
-	[CreateAssetMenu (menuName = "Actions/Physics/Is Grounded")]
-	public class IsGrounded : StateActions
+	[CreateAssetMenu (menuName = "Actions/Physics/IsGroundedMoveToGround")]
+	public class IsGroundedMoveToGround : StateActions
 	{
 		public float footOffset = 0.05f;
 		public float groundCheckerHeightOffset = 0.7f;
@@ -12,7 +12,7 @@ namespace StateAction
 
 		public override void Execute (StateManager states)
 		{
-			Vector3 origin = states.transform.position;
+			Vector3 origin = states.transformInstance.position;
 			origin.y += groundCheckerHeightOffset;
 
 			RaycastHit hit;

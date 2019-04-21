@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b65025ec2031e58438bfcda106bf651d, type: 3}
-  m_Name: IsGrounded
+  m_Script: {fileID: 11500000, guid: 7d032a737aa778b4f985f5a05d6df007, type: 3}
+  m_Name: IsGroundedSphereCast
   m_EditorClassIdentifier: 
   footOffset: 0.05
-  groundCheckerHeightOffset: 0.7
+  sphereCastRadius: 0.3
   distanceToGround: 1.7
+  onAirdDistanceToGround: 1.75
+  groundCheckerHeightOffset: 0.7
