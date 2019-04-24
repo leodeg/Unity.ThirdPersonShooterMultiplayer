@@ -7,13 +7,13 @@ namespace Multiplayer
     public class MultiplayerReferences
     {
         public PlayerHolder localPlayer;
-        public Transform referencesParent;
+        public Transform referencesTransform;
 
         private List<PlayerHolder> players = new List<PlayerHolder> ();
 
         public MultiplayerReferences ()
         {
-            referencesParent = new GameObject ("References").transform;
+            referencesTransform = new GameObject ("References").transform;
         }
 
         public int GetPlayersCount ()

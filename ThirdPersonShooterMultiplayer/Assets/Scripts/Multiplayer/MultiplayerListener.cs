@@ -32,6 +32,8 @@ namespace Multiplayer
         {
             states = GetComponent<StateAction.StateManager> ();
             transformInstance = this.transform;
+            MultiplayerManager multiplayerManager = MultiplayerManager.Singleton;
+            this.gameObject.transform.parent = multiplayerManager.MultiplayerReferences.referencesTransform;
 
             if (photonView.isMine)
             {
@@ -55,11 +57,11 @@ namespace Multiplayer
                 stream.SendNext (transformInstance.position);
                 stream.SendNext (transformInstance.rotation);
 
-                stream.SendNext (states.movementProperties.vertical);
-                stream.SendNext (states.movementProperties.horizontal);
-
                 stream.SendNext (states.currentState.isAiming);
                 stream.SendNext (states.currentState.isCrouching);
+
+                stream.SendNext (states.movementProperties.vertical);
+                stream.SendNext (states.movementProperties.horizontal);
             }
             else
             {
@@ -68,11 +70,13 @@ namespace Multiplayer
 
                 ReceivePositionRotation (position, rotation);
 
+                states.currentState.isAiming = (bool)stream.ReceiveNext ();
+                states.currentState.isCrouching = (bool)stream.ReceiveNext ();
+
                 states.movementProperties.vertical = (float)stream.ReceiveNext ();
                 states.movementProperties.horizontal = (float)stream.ReceiveNext ();
 
-                states.currentState.isAiming = (bool)stream.ReceiveNext ();
-                states.currentState.isCrouching = (bool)stream.ReceiveNext ();
+                states.movementProperties.moveAmount = Mathf.Clamp01 (Mathf.Abs (states.movementProperties.horizontal) + Mathf.Abs (states.movementProperties.vertical));
             }
         }
 

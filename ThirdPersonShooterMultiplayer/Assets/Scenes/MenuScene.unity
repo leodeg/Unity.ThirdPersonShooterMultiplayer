@@ -1256,6 +1256,7 @@ GameObject:
   - component: {fileID: 502024127}
   - component: {fileID: 502024128}
   - component: {fileID: 502024129}
+  - component: {fileID: 502024130}
   m_Layer: 5
   m_Name: MainMenuEventHolder
   m_TagString: Untagged
@@ -1362,6 +1363,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &502024130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502024126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf38972d5270272458ea1239652b4ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnParent: {fileID: 0}
+  matchesParent: {fileID: 0}
+  matchPrefab: {fileID: 0}
 --- !u!1 &601733200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3, y: -44.799988}
+  m_AnchoredPosition: {x: -3, y: -44.799927}
   m_SizeDelta: {x: -100, y: -690}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &765770224

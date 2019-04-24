@@ -90,6 +90,13 @@ namespace Multiplayer
             roomButton.isRoomCreated = true;
             roomButton.isValid = true;
 
+            object sceneObject;
+            roomInfo.CustomProperties.TryGetValue ("scene", out sceneObject);
+
+            roomButton.room = ScriptableObject.CreateInstance<Room> ();
+            roomButton.room.sceneName = (string)sceneObject;
+            roomButton.room.roomName = roomInfo.Name;
+
             roomsDictionary.Add (roomInfo.Name, roomButton);
         }
 

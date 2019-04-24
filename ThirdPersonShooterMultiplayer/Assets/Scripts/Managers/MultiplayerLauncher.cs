@@ -90,7 +90,10 @@ namespace Managers
 
         private void InstantiateMultiplayerManager ()
         {
-            PhotonNetwork.Instantiate ("MultiplayerManager", Vector3.zero, Quaternion.identity, 0);
+            if (PhotonNetwork.isMasterClient)
+            {
+                PhotonNetwork.Instantiate ("MultiplayerManager", Vector3.zero, Quaternion.identity, 0);
+            }
         }
 
         public override void OnCreatedRoom ()
@@ -204,9 +207,8 @@ namespace Managers
                     RoomOptions roomOptions = new RoomOptions ()
                     {
                         MaxPlayers = 5,
-                        CustomRoomProperties = new ExitGames.Client.Photon.Hashtable {
-                            {"scene", button.sceneName }
-                        }
+                        CustomRoomPropertiesForLobby = new string[] { "scene" },
+                        CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { "scene", button.sceneName } }
                     };
 
                     PhotonNetwork.CreateRoom (null, roomOptions, TypedLobby.Default);

@@ -8,17 +8,16 @@ namespace Multiplayer
         public static MultiplayerManager Singleton;
         private MultiplayerReferences multiplayerReferences;
 
+        public MultiplayerReferences MultiplayerReferences { get { return multiplayerReferences; } }
+
         private void OnPhotonInstantiate (PhotonMessageInfo info)
         {
             Singleton = this;
             DontDestroyOnLoad (this.gameObject);
-
             multiplayerReferences = new MultiplayerReferences ();
+            DontDestroyOnLoad (multiplayerReferences.referencesTransform.gameObject);
 
-            if (PhotonNetwork.isMasterClient)
-            {
-                InstantiateNetworkPrint ();
-            }
+            InstantiateNetworkPrint ();
         }
 
         #region Manager Methods
@@ -30,7 +29,7 @@ namespace Multiplayer
 
         public void AddNewPlayer (NetworkPrint networkPrint)
         {
-            networkPrint.transform.parent = multiplayerReferences.referencesParent;
+            networkPrint.transform.parent = multiplayerReferences.referencesTransform;
             PlayerHolder holder = multiplayerReferences.AddNewPlayer (networkPrint);
 
             if (networkPrint.isLocal)
