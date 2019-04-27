@@ -19,7 +19,12 @@ namespace Multiplayer
         public void InstantiateControllers (int spawnPositionIndex)
         {
             GameObject inputUpdater = Instantiate (Resources.Load ("InputUpdater")) as GameObject;
-            PhotonNetwork.Instantiate ("MultiplayerController", Vector3.zero, Quaternion.identity, 0, photonView.instantiationData);
+
+            object[] data = new object[2];
+            data[0] = photonId;
+            data[1] = photonView.instantiationData[0];
+
+            PhotonNetwork.Instantiate ("MultiplayerController", Vector3.zero, Quaternion.identity, 0, data);
         }
     }
 }

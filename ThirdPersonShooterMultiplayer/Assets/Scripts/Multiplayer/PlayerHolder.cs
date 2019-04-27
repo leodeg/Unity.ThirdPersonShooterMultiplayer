@@ -9,5 +9,6 @@ namespace Multiplayer
         public string userName;
         public int spawnPosition;
         public NetworkPrint networkPrint;
+        public StateAction.StateManager stateManager;
     }
 }

@@ -5,6 +5,7 @@ namespace Multiplayer
 {
     public class MultiplayerManager : Photon.MonoBehaviour
     {
+        public StateAction.RayBallistics ballistics;
         public static MultiplayerManager Singleton;
         private MultiplayerReferences multiplayerReferences;
 
@@ -47,9 +48,16 @@ namespace Multiplayer
             multiplayerReferences.localPlayer.networkPrint.InstantiateControllers (multiplayerReferences.localPlayer.spawnPosition);
         }
 
+
         #endregion
 
         #region Callbacks
+
+        public void BroadcastShootWeapon (StateAction.StateManager states, Vector3 direction, Vector3 origin)
+        {
+            int photonId = states.photonID;
+            photonView.RPC ("RPCShootWeapon", PhotonTargets.All, photonId, direction, origin);
+        }
 
         public void BroadcastSceneChange ()
         {
@@ -76,6 +84,18 @@ namespace Multiplayer
             if (photonID == multiplayerReferences.localPlayer.photonID)
             {
                 multiplayerReferences.localPlayer.spawnPosition = spawnPositionIndex;
+            }
+        }
+
+        [PunRPC]
+        public void RPCShootWeapon (int photonId, Vector3 direction, Vector3 origin)
+        {
+            if (photonId == multiplayerReferences.localPlayer.photonID) return;
+
+            PlayerHolder shooter = multiplayerReferences.GetPlayer (photonId);
+            if (shooter != null)
+            {
+                ballistics.ClientShoot (shooter.stateManager, direction, origin);
             }
         }
 

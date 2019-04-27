@@ -33,8 +33,14 @@ namespace Multiplayer
         {
             states = GetComponent<StateAction.StateManager> ();
             transformInstance = this.transform;
+            object[] data = photonView.instantiationData;
+            states.photonID = (int)data[0];
+
             MultiplayerManager multiplayerManager = MultiplayerManager.Singleton;
             this.gameObject.transform.parent = multiplayerManager.MultiplayerReferences.referencesTransform;
+
+            PlayerHolder playerHolder = multiplayerManager.MultiplayerReferences.GetPlayer (states.photonID);
+            playerHolder.stateManager = states;
 
             if (photonView.isMine)
             {
@@ -44,8 +50,7 @@ namespace Multiplayer
             }
             else
             {
-                object[] data = photonView.instantiationData;
-                string weaponID = (string)data[0];
+                string weaponID = (string)data[1];
                 states.inventory.weaponID = weaponID;
 
                 states.currentState.isLocal = false;

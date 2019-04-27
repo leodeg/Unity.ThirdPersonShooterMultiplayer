@@ -29,6 +29,7 @@ namespace StateAction
         public StateProperties currentState;
 
         [Header ("Multiplayer")]
+        public int photonID;
         public MultiplayerListener multiplayerListener;
         public bool isOfflineController;
         public StateActions offlineActions;

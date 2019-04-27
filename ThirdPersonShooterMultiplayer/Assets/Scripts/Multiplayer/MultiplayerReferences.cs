@@ -43,6 +43,15 @@ namespace Multiplayer
             return playerHolder;
         }
 
+        public PlayerHolder GetPlayer (int photonId)
+        {
+            foreach (PlayerHolder player in players)
+                if (player.photonID == photonId)
+                    return player;
+
+            return null;
+        }
+
         public bool IsUniquePlayer (int id)
         {
             foreach (PlayerHolder holder in players)
