@@ -38,5 +38,11 @@ namespace Managers
             }
             return ammoManager;
         }
+
+        private static PlayerProfile playerProfile;
+        public static PlayerProfile GetPlayerProfile ()
+        {
+            return Resources.Load ("PlayerProfile") as PlayerProfile;
+        }
     }
 }

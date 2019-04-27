@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -96,7 +96,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: a270c9ca0763aea4d92ea65c1c087ac3,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -879,6 +880,7 @@ MonoBehaviour:
   isRoomCreated: 0
   room: {fileID: 0}
   sceneName: level1
+  isValid: 0
 --- !u!1 &376023244
 GameObject:
   m_ObjectHideFlags: 0

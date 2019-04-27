@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdfdadcaf1cc05a4ab68623d3e53ce4a, type: 3}
-  m_Name: ClientControllerUpdater
+  m_Script: {fileID: 11500000, guid: e3bdeb8ecf0b41f4ab1563cacd771248, type: 3}
+  m_Name: InitClientController 1
   m_EditorClassIdentifier: 
-  stateActions:
-  - {fileID: 11400000, guid: 90f9b77d36908a74eae883d0d2b84ab8, type: 2}
+  actions:
+  - {fileID: 11400000, guid: fa435c1a941d31448b4b0297fe15c6f6, type: 2}
   - {fileID: 11400000, guid: 3329d1e37c0dd01469a061fbcd6edb81, type: 2}
-  - {fileID: 11400000, guid: 8fba9fa9d557eb24fb241769caba016d, type: 2}

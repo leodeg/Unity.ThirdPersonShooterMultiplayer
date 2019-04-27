@@ -10,16 +10,16 @@ namespace Multiplayer
 
         private void OnPhotonInstantiate (PhotonMessageInfo info)
         {
-            MultiplayerManager manager = MultiplayerManager.Singleton;
+            MultiplayerManager multiplayerManager = MultiplayerManager.Singleton;
             photonId = photonView.ownerId;
             isLocal = photonView.isMine;
-            manager.AddNewPlayer (this);
+            multiplayerManager.AddNewPlayer (this);
         }
 
         public void InstantiateControllers (int spawnPositionIndex)
         {
             GameObject inputUpdater = Instantiate (Resources.Load ("InputUpdater")) as GameObject;
-            PhotonNetwork.Instantiate ("MultiplayerController", Vector3.zero, Quaternion.identity, 0);
+            PhotonNetwork.Instantiate ("MultiplayerController", Vector3.zero, Quaternion.identity, 0, photonView.instantiationData);
         }
     }
 }

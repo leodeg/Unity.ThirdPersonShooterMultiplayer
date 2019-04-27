@@ -5,7 +5,7 @@ using StateAction;
 
 namespace Managers
 {
-    [CreateAssetMenu (menuName = "Managers/Ammo Manager")]
+    [CreateAssetMenu (menuName = "Managers/AmmoManager")]
     public class AmmoManager : ScriptableObject
     {
         public List<Ammo> ammunitions = new List<Ammo> ();

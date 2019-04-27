@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3427401ec66171b4697dbb5917d5b4b8, type: 3}
-  m_Name: InitClientController
+  m_Script: {fileID: 11500000, guid: ba2718c2c5c81094a97d7768aff4c532, type: 3}
+  m_Name: PlayerProfile
   m_EditorClassIdentifier: 
-  updater: {fileID: 11400000, guid: 430d7ede50e8d6c468c0f81a078b1251, type: 2}
+  itemIds:
+  - AK

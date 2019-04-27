@@ -43,6 +43,10 @@ namespace Multiplayer
             }
             else
             {
+                object[] data = photonView.instantiationData;
+                string weaponID = (string)data[0];
+                states.inventory.weaponID = weaponID;
+
                 states.currentState.isLocal = false;
                 states.SetCurrentState (clientState);
                 initClientPlayer.Execute (states);
@@ -58,25 +62,32 @@ namespace Multiplayer
                 stream.SendNext (transformInstance.rotation);
 
                 stream.SendNext (states.currentState.isAiming);
+                stream.SendNext (states.currentState.shootingFlag);
+                states.currentState.shootingFlag = false;
+                stream.SendNext (states.currentState.reloadingFlag);
+                states.currentState.reloadingFlag = false;
                 stream.SendNext (states.currentState.isCrouching);
 
                 stream.SendNext (states.movementProperties.vertical);
                 stream.SendNext (states.movementProperties.horizontal);
+                stream.SendNext (states.movementProperties.aimPosition);
             }
             else
             {
                 Vector3 position = (Vector3)stream.ReceiveNext ();
                 Quaternion rotation = (Quaternion)stream.ReceiveNext ();
-
                 ReceivePositionRotation (position, rotation);
 
                 states.currentState.isAiming = (bool)stream.ReceiveNext ();
+                states.currentState.isShooting = (bool)stream.ReceiveNext ();
+                states.currentState.isReloading = (bool)stream.ReceiveNext ();
                 states.currentState.isCrouching = (bool)stream.ReceiveNext ();
 
                 states.movementProperties.vertical = (float)stream.ReceiveNext ();
                 states.movementProperties.horizontal = (float)stream.ReceiveNext ();
 
                 states.movementProperties.moveAmount = Mathf.Clamp01 (Mathf.Abs (states.movementProperties.horizontal) + Mathf.Abs (states.movementProperties.vertical));
+                states.movementProperties.aimPosition = (Vector3)stream.ReceiveNext ();
             }
         }
 

@@ -12,5 +12,6 @@ namespace StateAction
         public int isGrounded = Animator.StringToHash ("isGrounded");
         public int vaultWalk = Animator.StringToHash ("Vault Walk");
         public int isInteracting = Animator.StringToHash ("isInteracting");
+        public int isAiming = Animator.StringToHash ("aiming");
     }
 }

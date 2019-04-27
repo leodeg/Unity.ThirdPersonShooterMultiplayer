@@ -15,6 +15,7 @@ namespace StateAction
                 {
                     if (!states.currentState.isInteracting)
                     {
+                        states.currentState.reloadingFlag = true;
                         states.currentState.isInteracting = true;
                         states.PlayAnimation (states.animationName.rifleReloading);
                         states.animatorInstance.SetBool (states.animatorParameters.isInteracting, true);
@@ -28,17 +29,17 @@ namespace StateAction
                             states.inventory.ReloadCurrentWeapon ();
                         }
                     }
+                    return;
                 }
                 else
                 {
                     states.currentState.isReloading = false;
                 }
-
-                return;
             }
 
             if (states.currentState.isShooting && !states.currentState.isReloading)
             {
+                states.currentState.shootingFlag = true;
                 states.currentState.isShooting = false;
                 Weapon weapon = states.inventory.currentWeapon;
 

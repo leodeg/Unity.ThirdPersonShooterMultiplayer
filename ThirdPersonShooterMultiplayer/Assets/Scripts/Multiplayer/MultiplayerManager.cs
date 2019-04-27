@@ -24,7 +24,11 @@ namespace Multiplayer
 
         private void InstantiateNetworkPrint ()
         {
-            GameObject networkPrintInstance = PhotonNetwork.Instantiate ("NetworkPrint", Vector3.zero, Quaternion.identity, 0);
+            Managers.PlayerProfile playerProfile = Managers.GameManagers.GetPlayerProfile ();
+            object[] data = new object[1];
+            data[0] = playerProfile.itemIds[0];
+
+            GameObject networkPrintInstance = PhotonNetwork.Instantiate ("NetworkPrint", Vector3.zero, Quaternion.identity, 0, data);
         }
 
         public void AddNewPlayer (NetworkPrint networkPrint)
