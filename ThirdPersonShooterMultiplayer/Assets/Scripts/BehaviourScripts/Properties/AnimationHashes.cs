@@ -9,9 +9,11 @@ namespace StateAction
         public int horizontal = Animator.StringToHash ("horizontal");
         public int leftFootForward = Animator.StringToHash ("leftFootForward");
         public int rightFootForward = Animator.StringToHash ("rightFootForward");
-        public int isGrounded = Animator.StringToHash ("isGrounded");
+        public int grounded = Animator.StringToHash ("isGrounded");
         public int vaultWalk = Animator.StringToHash ("Vault Walk");
-        public int isInteracting = Animator.StringToHash ("isInteracting");
-        public int isAiming = Animator.StringToHash ("aiming");
+        public int interacting = Animator.StringToHash ("isInteracting");
+        public int aiming = Animator.StringToHash ("aiming");
+        public int shooting = Animator.StringToHash ("shooting");
+        public int crouching = Animator.StringToHash ("crouch");
     }
 }

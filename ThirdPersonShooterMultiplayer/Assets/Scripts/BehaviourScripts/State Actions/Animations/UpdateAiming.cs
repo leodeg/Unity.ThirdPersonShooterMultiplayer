@@ -8,7 +8,9 @@ namespace StateAction
     {
         public override void Execute (StateManager states)
         {
-            states.animatorInstance.SetBool (states.animationHashes.isAiming, states.currentState.isAiming);
+            states.animatorInstance.SetBool (states.animationHashes.aiming, states.currentState.isAiming);
+            states.animatorInstance.SetBool (states.animationHashes.crouching, states.currentState.isCrouching);
+
         }
     }
 }

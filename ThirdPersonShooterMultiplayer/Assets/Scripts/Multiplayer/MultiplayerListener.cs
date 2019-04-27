@@ -10,6 +10,7 @@ namespace Multiplayer
         public StateAction.StateActions initLocalPlayer;
         public StateAction.State clientState;
         public StateAction.StateActions initClientPlayer;
+        public StateAction.State vaultState;
 
         [Header ("Prediction")]
         public float snapAngle = 40f;
@@ -60,16 +61,20 @@ namespace Multiplayer
             {
                 stream.SendNext (transformInstance.position);
                 stream.SendNext (transformInstance.rotation);
-
                 stream.SendNext (states.currentState.isAiming);
-                stream.SendNext (states.currentState.shootingFlag);
-                states.currentState.shootingFlag = false;
-                stream.SendNext (states.currentState.reloadingFlag);
-                states.currentState.reloadingFlag = false;
-                stream.SendNext (states.currentState.isCrouching);
 
-                stream.SendNext (states.movementProperties.vertical);
-                stream.SendNext (states.movementProperties.horizontal);
+                stream.SendNext (states.currentState.isVaulting);
+                if (!states.currentState.isVaulting)
+                {
+                    stream.SendNext (states.currentState.shootingFlag);
+                    states.currentState.shootingFlag = false;
+                    stream.SendNext (states.currentState.reloadingFlag);
+                    states.currentState.reloadingFlag = false;
+                    stream.SendNext (states.currentState.isCrouching);
+                    stream.SendNext (states.movementProperties.vertical);
+                    stream.SendNext (states.movementProperties.horizontal);
+                }
+
                 stream.SendNext (states.movementProperties.aimPosition);
             }
             else
@@ -79,14 +84,39 @@ namespace Multiplayer
                 ReceivePositionRotation (position, rotation);
 
                 states.currentState.isAiming = (bool)stream.ReceiveNext ();
-                states.currentState.isShooting = (bool)stream.ReceiveNext ();
-                states.currentState.isReloading = (bool)stream.ReceiveNext ();
-                states.currentState.isCrouching = (bool)stream.ReceiveNext ();
+                states.currentState.isVaulting = (bool)stream.ReceiveNext ();
+                if (states.currentState.isVaulting)
+                {
+                    states.currentState.isCrouching = false;
+                    states.currentState.isAiming = false;
+                    states.currentState.isReloading = false;
+                    states.movementProperties.horizontal = 0;
+                    states.movementProperties.vertical = 0;
+                    states.movementProperties.moveAmount = 0;
 
-                states.movementProperties.vertical = (float)stream.ReceiveNext ();
-                states.movementProperties.horizontal = (float)stream.ReceiveNext ();
+                    if (!states.currentState.vaultingFlag)
+                    {
+                        states.currentState.vaultingFlag = true;
+                        states.animatorInstance.CrossFade (states.animationHashes.vaultWalk, 0.2f);
+                        states.currentBehaviorState = vaultState;
+                    }
+                }
+                else
+                {
+                    if (states.currentState.vaultingFlag)
+                    {
+                        states.currentState.vaultingFlag = false;
+                        states.currentBehaviorState = clientState;
+                    }
 
-                states.movementProperties.moveAmount = Mathf.Clamp01 (Mathf.Abs (states.movementProperties.horizontal) + Mathf.Abs (states.movementProperties.vertical));
+                    states.currentState.isShooting = (bool)stream.ReceiveNext ();
+                    states.currentState.isReloading = (bool)stream.ReceiveNext ();
+                    states.currentState.isCrouching = (bool)stream.ReceiveNext ();
+                    states.movementProperties.vertical = (float)stream.ReceiveNext ();
+                    states.movementProperties.horizontal = (float)stream.ReceiveNext ();
+                    states.movementProperties.moveAmount = Mathf.Clamp01 (Mathf.Abs (states.movementProperties.horizontal) + Mathf.Abs (states.movementProperties.vertical));
+                }
+
                 states.movementProperties.aimPosition = (Vector3)stream.ReceiveNext ();
             }
         }
