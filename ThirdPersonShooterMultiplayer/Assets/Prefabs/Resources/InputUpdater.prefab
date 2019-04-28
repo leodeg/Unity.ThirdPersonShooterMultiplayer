@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2463017631285736637}
   - component: {fileID: 2463017631285736636}
   m_Layer: 0
-  m_Name: InputHolder
+  m_Name: InputUpdater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,3 +47,8 @@ MonoBehaviour:
   updateActions:
   - {fileID: 11400000, guid: cb3d9912ec726224cb10963d09bd6035, type: 2}
   - {fileID: 11400000, guid: 899266d748c027d41aaeaff2ff7127cf, type: 2}
+  - {fileID: 11400000, guid: 02eeba6830b586e43882acc94bd1751d, type: 2}
+  - {fileID: 11400000, guid: 35a3568101c44344b9b37c8db78ab08f, type: 2}
+  - {fileID: 11400000, guid: fbc373bec9205ed43b051f3cfa976fae, type: 2}
+  startActions:
+  - {fileID: 11400000, guid: 46bb50bbc42f2b34f86dd2a98c94d3a0, type: 2}

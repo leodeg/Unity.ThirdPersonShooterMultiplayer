@@ -4,31 +4,43 @@ using UnityEngine;
 
 namespace StateAction
 {
-	public class ActionUpdater : MonoBehaviour
-	{
-		public Action[] fixedUpdateActions;
-		public Action[] updateActions;
+    public class ActionUpdater : MonoBehaviour
+    {
+        public Action[] startActions;
+        public Action[] updateActions;
+        public Action[] fixedUpdateActions;
 
-		void FixedUpdate()
-		{
-			if (fixedUpdateActions == null)
-				return;
+        private void Start ()
+        {
+            if (startActions == null)
+                return;
 
-			for (int i = 0; i < fixedUpdateActions.Length; i++)
-			{
-				fixedUpdateActions[i].Execute();
-			}
-		}
+            for (int i = 0; i < startActions.Length; i++)
+            {
+                startActions[i].Execute ();
+            }
+        }
 
-		void Update()
-		{
-			if (updateActions == null)
-				return;
+        void FixedUpdate ()
+        {
+            if (fixedUpdateActions == null)
+                return;
 
-			for (int i = 0; i < updateActions.Length; i++)
-			{
-				updateActions[i].Execute();
-			}
-		}
-	}
+            for (int i = 0; i < fixedUpdateActions.Length; i++)
+            {
+                fixedUpdateActions[i].Execute ();
+            }
+        }
+
+        void Update ()
+        {
+            if (updateActions == null)
+                return;
+
+            for (int i = 0; i < updateActions.Length; i++)
+            {
+                updateActions[i].Execute ();
+            }
+        }
+    }
 }

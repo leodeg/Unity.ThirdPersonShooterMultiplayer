@@ -9,9 +9,11 @@ namespace StateAction
     [CreateAssetMenu (menuName = "Actions/Physics/Follow Transform")]
     public class FollowTransform : Action
     {
+        public FloatVariable deltaTime;
         public TransformVariable targetTransform;
         public TransformVariable currentTransform;
         public float speed = 9;
+
 
 		public override void Execute ()
 		{
@@ -26,7 +28,7 @@ namespace StateAction
 				return;
 			}
 
-			currentTransform.transform.position = Vector3.Lerp (currentTransform.transform.position, targetTransform.transform.position, Time.deltaTime * speed);
+			currentTransform.transform.position = Vector3.Lerp (currentTransform.transform.position, targetTransform.transform.position, deltaTime.value * speed);
 		}
 	}
 }
