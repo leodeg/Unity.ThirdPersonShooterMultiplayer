@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace StateAction
 {
-    [CreateAssetMenu (menuName = "Actions/StateActions/HandleCursor")]
+    [CreateAssetMenu (menuName = "Actions/HandleCursor")]
     public class HandleCursor : Action
     {
         public CursorLockMode lockMode;

@@ -40,7 +40,7 @@ namespace Multiplayer
             this.gameObject.transform.parent = multiplayerManager.MultiplayerReferences.referencesTransform;
 
             PlayerHolder playerHolder = multiplayerManager.MultiplayerReferences.GetPlayer (states.photonID);
-            playerHolder.stateManager = states;
+            playerHolder.states = states;
 
             if (photonView.isMine)
             {
@@ -62,8 +62,14 @@ namespace Multiplayer
 
         public void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo messageInfo)
         {
+            if (states.currentState.isDead)
+            {
+                return;
+            }
+
             if (stream.isWriting)
             {
+
                 stream.SendNext (transformInstance.position);
                 stream.SendNext (transformInstance.rotation);
                 stream.SendNext (states.currentState.isAiming);

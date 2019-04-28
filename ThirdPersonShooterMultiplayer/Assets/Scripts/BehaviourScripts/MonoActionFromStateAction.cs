@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace StateAction
 {
-    [CreateAssetMenu (menuName = "Actions/StateActions/MonoActionFromStateAction")]
+    [CreateAssetMenu (menuName = "Actions/MonoActionFromStateAction")]
     public class MonoActionFromStateAction : StateActions
     {
         public Action monoAction;

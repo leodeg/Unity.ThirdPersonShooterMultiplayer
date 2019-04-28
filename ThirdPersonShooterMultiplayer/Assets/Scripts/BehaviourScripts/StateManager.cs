@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Multiplayer;
+using System;
 
 namespace StateAction
 {
@@ -19,6 +20,9 @@ namespace StateAction
 
         [Header ("Inventory")]
         public Inventory inventory;
+
+        [Header ("OnHit")]
+        public string hitEffectsName = "bloodEffects";
 
         [Header ("Animation")]
         public AnimationsName animationName;
@@ -43,6 +47,9 @@ namespace StateAction
         [HideInInspector] public Rigidbody rigidbodyInstance;
         [HideInInspector] public Transform transformInstance;
         [HideInInspector] public AnimatorController animatorController;
+        [HideInInspector] public List<Rigidbody> ragdollRigidbodies = new List<Rigidbody> ();
+        [HideInInspector] public List<Collider> ragdollColliders = new List<Collider> ();
+
 
         private void Start ()
         {
@@ -57,6 +64,8 @@ namespace StateAction
 
         private void FixedUpdate ()
         {
+            if (currentState.isDead) return;
+
             deltaTime = Time.deltaTime;
             if (currentBehaviorState != null)
             {
@@ -66,6 +75,8 @@ namespace StateAction
 
         private void Update ()
         {
+            if (currentState.isDead) return;
+
             deltaTime = Time.deltaTime;
 
             if (currentBehaviorState != null)
@@ -87,17 +98,54 @@ namespace StateAction
             animatorInstance.CrossFade (animationName, 0.2f);
         }
 
-        public void OnHit (StateManager shooter, Weapon weapon, Vector3 direction, Vector3 position)
+        public void OnHit (StateManager killerStateManager, Weapon weapon, Vector3 direction, Vector3 position)
         {
-            playerStats.health -= weapon.ammoType.damageValue;
+            ShowHitParticleEffect (direction, position);
 
+            playerStats.health -= weapon.ammoType.damageValue;
             if (playerStats.health <= 0)
             {
                 playerStats.health = 0;
-                // TODO: raise death event
+                if (!currentState.isDead)
+                {
+                    currentState.isDead = true;
+                    MultiplayerManager.Singleton.BroadcastKillPlayer (photonID, killerStateManager.photonID);
+                }
+            }
+            currentState.healthChangeFlag = true;
+        }
+
+        private void ShowHitParticleEffect (Vector3 direction, Vector3 position)
+        {
+            GameObject hitParticle = Managers.GameManagers.GetObjectPool ().GetObject (hitEffectsName);
+            if (hitParticle != null)
+            {
+                Quaternion rotation = Quaternion.LookRotation (-direction);
+                hitParticle.transform.position = position;
+                hitParticle.transform.rotation = rotation;
+            }
+            else
+            {
+                Debug.LogWarning ("StateManager::GameManagers::ObjectPool::ERROR::Hit particle is null or name of particle: [" + hitEffectsName + "] is wrong.");
+            }
+        }
+
+        public void SpawnPlayer ()
+        {
+            if (currentState.isLocal)
+            {
+                currentState.healthChangeFlag = true;
+                playerStats.health = 100;
             }
 
-            currentState.healthChangeFlag = true;
+            currentState.isDead = false;
+            animatorInstance.Play (animationName.locomotion);
+        }
+
+        public void KillPlayer ()
+        {
+            currentState.isDead = true;
+            animatorInstance.CrossFade (animationName.death, 0.4f);
         }
     }
 }

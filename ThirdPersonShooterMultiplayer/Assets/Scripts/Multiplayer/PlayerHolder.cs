@@ -7,8 +7,9 @@ namespace Multiplayer
     {
         public int photonID;
         public string userName;
+        public float spawnTimer;
         public int spawnPosition;
         public NetworkPrint networkPrint;
-        public StateAction.StateManager stateManager;
+        public StateAction.StateManager states;
     }
 }

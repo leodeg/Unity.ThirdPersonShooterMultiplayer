@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StateAction
 {
-    [CreateAssetMenu (menuName = "Actions/StateActions/InitClientController")]
+    [CreateAssetMenu (menuName = "Actions/Initialize/InitClientController")]
     public class InitClientController : StateActions
     {
         public StateActions[] actions;

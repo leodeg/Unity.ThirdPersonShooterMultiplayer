@@ -1,24 +1,49 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Multiplayer
 {
     public class MultiplayerManager : Photon.MonoBehaviour
     {
+        public float spawnTimer = 5.0f;
         public StateAction.RayBallistics ballistics;
         public static MultiplayerManager Singleton;
-        private MultiplayerReferences multiplayerReferences;
 
-        public MultiplayerReferences MultiplayerReferences { get { return multiplayerReferences; } }
+        private List<PlayerHolder> playersToRespawn = new List<PlayerHolder> ();
+
+
+        public MultiplayerReferences MultiplayerReferences { get; private set; }
 
         private void OnPhotonInstantiate (PhotonMessageInfo info)
         {
             Singleton = this;
             DontDestroyOnLoad (this.gameObject);
-            multiplayerReferences = new MultiplayerReferences ();
-            DontDestroyOnLoad (multiplayerReferences.referencesTransform.gameObject);
+            MultiplayerReferences = new MultiplayerReferences ();
+            DontDestroyOnLoad (MultiplayerReferences.referencesTransform.gameObject);
 
             InstantiateNetworkPrint ();
+        }
+
+        private void Update ()
+        {
+            float deltaTime = Time.deltaTime;
+
+            if (playersToRespawn.Count > 0)
+            {
+                foreach (PlayerHolder player in playersToRespawn)
+                {
+                    player.spawnTimer += deltaTime;
+
+                    if (player.spawnTimer > spawnTimer)
+                    {
+                        player.spawnTimer = 0;
+                        photonView.RPC ("RPCSpawnPlayer", PhotonTargets.All, player.photonID);
+                        playersToRespawn.Remove (player);
+                    }
+                }
+            }
         }
 
         #region Manager Methods
@@ -34,18 +59,18 @@ namespace Multiplayer
 
         public void AddNewPlayer (NetworkPrint networkPrint)
         {
-            networkPrint.transform.parent = multiplayerReferences.referencesTransform;
-            PlayerHolder holder = multiplayerReferences.AddNewPlayer (networkPrint);
+            networkPrint.transform.parent = MultiplayerReferences.referencesTransform;
+            PlayerHolder holder = MultiplayerReferences.AddNewPlayer (networkPrint);
 
             if (networkPrint.isLocal)
             {
-                multiplayerReferences.localPlayer = holder;
+                MultiplayerReferences.localPlayer = holder;
             }
         }
 
         public void CreateController ()
         {
-            multiplayerReferences.localPlayer.networkPrint.InstantiateControllers (multiplayerReferences.localPlayer.spawnPosition);
+            MultiplayerReferences.localPlayer.networkPrint.InstantiateControllers (MultiplayerReferences.localPlayer.spawnPosition);
         }
 
 
@@ -67,6 +92,11 @@ namespace Multiplayer
             }
         }
 
+        public void BroadcastKillPlayer (int photonId, int killerId)
+        {
+            photonView.RPC ("RPCReceiveKillPlayer", PhotonTargets.All, photonId, killerId);
+        }
+
         #endregion
 
         #region RPCs
@@ -81,21 +111,51 @@ namespace Multiplayer
         [PunRPC]
         public void RPCSetSpawnPositionToPlayer (int photonID, int spawnPositionIndex)
         {
-            if (photonID == multiplayerReferences.localPlayer.photonID)
+            if (photonID == MultiplayerReferences.localPlayer.photonID)
             {
-                multiplayerReferences.localPlayer.spawnPosition = spawnPositionIndex;
+                MultiplayerReferences.localPlayer.spawnPosition = spawnPositionIndex;
             }
         }
 
         [PunRPC]
         public void RPCShootWeapon (int photonId, Vector3 direction, Vector3 origin)
         {
-            if (photonId == multiplayerReferences.localPlayer.photonID) return;
+            if (photonId == MultiplayerReferences.localPlayer.photonID) return;
 
-            PlayerHolder shooter = multiplayerReferences.GetPlayer (photonId);
+            PlayerHolder shooter = MultiplayerReferences.GetPlayer (photonId);
             if (shooter != null)
             {
-                ballistics.ClientShoot (shooter.stateManager, direction, origin);
+                ballistics.ClientShoot (shooter.states, null, direction, origin);
+            }
+        }
+
+        [PunRPC]
+        public void RPCSpawnPlayer (int photonId)
+        {
+            PlayerHolder playerHolder = MultiplayerReferences.GetPlayer (photonId);
+
+            if (playerHolder.states != null)
+            {
+                playerHolder.states.SpawnPlayer ();
+            }
+        }
+
+        [PunRPC]
+        public void RPCReceiveKillPlayer (int photonId, int killerId)
+        {
+            // Master client
+            photonView.RPC ("RPCKillPlayer", PhotonTargets.All, photonId, killerId);
+            playersToRespawn.Add (MultiplayerReferences.GetPlayer (photonId));
+        }
+
+        [PunRPC]
+        public void RPCKillPlayer (int photonId, int killerId)
+        {
+            PlayerHolder playerHolder = MultiplayerReferences.GetPlayer (photonId);
+
+            if (playerHolder.states != null)
+            {
+                playerHolder.states.KillPlayer ();
             }
         }
 

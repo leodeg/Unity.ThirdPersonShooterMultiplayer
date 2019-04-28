@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace StateAction
 {
-    [CreateAssetMenu (menuName = "Actions/StateActions/InitPlayerController")]
+    [CreateAssetMenu (menuName = "Actions/Initialize/InitPlayerController")]
     public class InitPlayerController : StateActions
     {
         public StateActions updater;

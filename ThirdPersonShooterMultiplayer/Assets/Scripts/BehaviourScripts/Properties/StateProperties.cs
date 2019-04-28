@@ -13,6 +13,7 @@ namespace StateAction
         public bool isCrouching;
         public bool isInteracting;
         public bool isGround;
+        public bool isDead;
 
         public bool shootingFlag;
         public bool reloadingFlag;
