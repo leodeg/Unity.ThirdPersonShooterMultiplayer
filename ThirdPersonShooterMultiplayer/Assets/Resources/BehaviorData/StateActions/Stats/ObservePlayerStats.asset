@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77200dcfd00d0f4f89563ce3fd0cff8, type: 3}
+  m_Name: ObservePlayerStats
+  m_EditorClassIdentifier: 
+  states: {fileID: 11400000, guid: 8d4714cdefad51940ac77e86f9f4a729, type: 2}
+  healthIsChanged: {fileID: 11400000, guid: 469889320ef6c154a995a53ef4671fe3, type: 2}
+  playerHealth: {fileID: 11400000, guid: 3722a22588a7b8a459189efb378f8310, type: 2}
+  ammoIsChanged: {fileID: 11400000, guid: d35497e1b34552d459867ac5b64f2a1d, type: 2}
+  currentAmmo: {fileID: 11400000, guid: 7ecd12fc730406a4f9cbdec121d6763c, type: 2}

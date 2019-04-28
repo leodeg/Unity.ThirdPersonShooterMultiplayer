@@ -18,6 +18,8 @@ namespace StateAction
         public bool reloadingFlag;
         public bool vaultingFlag;
 
+        public bool healthChangeFlag;
+
         public void SetCrouching ()
         {
             isCrouching = !isCrouching;

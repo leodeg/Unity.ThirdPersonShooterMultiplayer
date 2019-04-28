@@ -15,6 +15,7 @@ namespace StateAction
         [Header ("State Properties")]
         public State currentBehaviorState;
         public Ballistics ballisticActions;
+        public PlayerStats playerStats;
 
         [Header ("Inventory")]
         public Inventory inventory;
@@ -88,7 +89,15 @@ namespace StateAction
 
         public void OnHit (StateManager shooter, Weapon weapon, Vector3 direction, Vector3 position)
         {
-            throw new System.NotImplementedException ();
+            playerStats.health -= weapon.ammoType.damageValue;
+
+            if (playerStats.health <= 0)
+            {
+                playerStats.health = 0;
+                // TODO: raise death event
+            }
+
+            currentState.healthChangeFlag = true;
         }
     }
 }

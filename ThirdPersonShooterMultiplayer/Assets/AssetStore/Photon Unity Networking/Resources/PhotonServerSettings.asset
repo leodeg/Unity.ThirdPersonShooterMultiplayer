@@ -40,4 +40,6 @@ MonoBehaviour:
   - RPCCreateControllers
   - RPCSceneChange
   - RPCSetSpawnPositionToPlayer
+  - RPCPlaceEnvironmentParticle
+  - RPCShootWeapon
   DisableAutoOpenWizard: 1

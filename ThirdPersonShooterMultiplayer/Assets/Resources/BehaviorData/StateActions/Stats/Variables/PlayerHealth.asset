@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e09f12a9b8fb5e44eb81fa499afbecc4, type: 3}
-  m_Name: VaultingStateClient
+  m_Script: {fileID: 11500000, guid: e1837463d7b1e5c40940f172250ac2f9, type: 3}
+  m_Name: PlayerHealth
   m_EditorClassIdentifier: 
-  onFixed: []
-  onUpdate:
-  - {fileID: 0}
-  onEnter: []
-  onExit: []
-  idCount: 0
-  transitions: []
+  value: 0
